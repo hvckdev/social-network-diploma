@@ -1,48 +1,47 @@
 @props(['id', 'maxWidth'])
 
 @php
-$id = $id ?? md5($attributes->wire('model'));
+    $id = $id ?? md5($attributes->wire('model'));
 
-$maxWidth = [
-    'sm' => ' modal-sm',
-    'md' => '',
-    'lg' => ' modal-lg',
-    'xl' => ' modal-xl',
-][$maxWidth ?? 'md'];
+    $maxWidth = [
+        'sm' => ' modal-sm',
+        'md' => '',
+        'lg' => ' modal-lg',
+        'xl' => ' modal-xl',
+    ][$maxWidth ?? 'md'];
 @endphp
-
 <!-- Modal -->
+@push('modals')
 <div
     x-data="{
         show: @entangle($attributes->wire('model')).defer,
     }"
     x-init="() => {
-
-        let el = document.querySelector('#modal-id-{{ $id }}')
-
-        let modal = new bootstrap.Modal(el);
+        let el = document.getElementById('modal-id-{{ $id }}')
 
         $watch('show', value => {
-            if (value) {
-                modal.show()
-            } else {
-                modal.hide()
+                el.classList.toggle('show')
             }
         });
-
-        el.addEventListener('hide.bs.modal', function (event) {
+}
+        el.addEventListener('classList.remove', function (event) {
           show = false
         })
     }"
     wire:ignore.self
-    class="modal fade"
     tabindex="-1"
     id="modal-id-{{ $id }}"
     aria-labelledby="modal-id-{{ $id }}"
-    aria-hidden="true"
     x-ref="modal-id-{{ $id }}"
+    role="dialog"
 >
-    <div class="modal-dialog{{ $maxWidth }}">
-        {{ $slot }}
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button class="close" data-dismiss="modal" type="button" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ $slot }}
+        </div>
     </div>
 </div>
+@endpush

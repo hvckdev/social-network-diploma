@@ -1,13 +1,13 @@
 @props(['active'])
 
 @php
-$classes = ($active ?? false)
-            ? 'nav-link active font-weight-bolder'
-            : 'nav-link';
+    $classes = ($active ?? false)
+                ? 'sidebar-link active'
+                : 'sidebar-link';
 @endphp
 
-<li class="nav-item">
-    <a {{ $attributes->merge(['class' => $classes]) }}>
-        {{ $slot }}
-    </a>
-</li>
+
+<a {{ $attributes->merge(['class' => $classes]) }}>
+    {{ $slot }}
+</a>
+

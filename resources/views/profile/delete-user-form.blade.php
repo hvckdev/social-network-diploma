@@ -8,11 +8,11 @@
     </x-slot>
 
     <x-slot name="content">
-        <div>
+        <div class="form-group">
             {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
         </div>
 
-        <div class="mt-3">
+        <div class="mt-2">
             <x-jet-danger-button wire:click="confirmUserDeletion" wire:loading.attr="disabled">
                 {{ __('Delete Account') }}
             </x-jet-danger-button>

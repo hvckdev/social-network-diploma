@@ -12,12 +12,12 @@
             {{ __('Done.') }}
         </x-jet-action-message>
 
-        <div>
+        <div class="form-group">
             {{ __('If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }}
         </div>
 
         @if (count($this->sessions) > 0)
-            <div class="mt-3">
+            <div class="form-group">
                 <!-- Other Browser Sessions -->
                 @foreach ($this->sessions as $session)
                     <div class="d-flex">

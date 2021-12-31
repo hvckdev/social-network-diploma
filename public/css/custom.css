@@ -1,0 +1,16 @@
+:root {
+    /* Card */
+
+    --card-border-radius: 1.2rem;                           /* Before: var(--base-border-radius) */
+
+    /* Card (light mode only) */
+    --lm-card-bg-image: linear-gradient(#f7f7f7, #ced6e0);  /* Before: none */
+    --lm-card-border-color: #ffffff;                        /* Before: rgba(0, 0, 0, 0.2) */
+    --lm-card-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);    /* Before: none */
+
+    /* Card (dark mode only) */
+
+    --dm-card-bg-image: linear-gradient(#191c20, #111417);  /* Before: none */
+    --dm-card-border-color: rgba(255, 255, 255, 0.1);       /* Before: rgba(0, 0, 0, 0.2) */
+    --dm-card-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);     /* Before: none */
+}

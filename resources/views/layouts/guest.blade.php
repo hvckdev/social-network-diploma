@@ -11,13 +11,21 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/halfmoon.min.css') }}">
+        <!-- Halfmoon CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+
+        @livewireStyles
 
         <!-- Scripts -->
-        <script src="{{ asset('js/halfmoon.min.js') }}" defer></script>
+        <!-- Halfmoon JS -->
+        <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+
+        <script src="https://kit.fontawesome.com/9c68ecdcd7.js" crossorigin="anonymous"></script>
     </head>
 
-    <body>
+    <body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="true" data-set-preferred-mode-onload="true">>
+    <div class="page-wrapper with-navbar with-navbar-fixed-bottom">
+        @livewire('navigation-menu')
         <div class="content-wrapper">
             {{ $slot }}
         </div>
