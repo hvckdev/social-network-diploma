@@ -2,8 +2,8 @@
 
 @php
     $classes = ($active ?? false)
-                ? 'sidebar-link active'
-                : 'sidebar-link';
+                ? 'sidebar-link sidebar-link-with-icon active'
+                : 'sidebar-link sidebar-link-with-icon';
 @endphp
 
 

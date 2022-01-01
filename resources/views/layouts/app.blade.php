@@ -24,7 +24,10 @@
 
 </head>
 <body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="true" data-set-preferred-mode-onload="true">>
+    @stack('modals')
+
     <div class="page-wrapper with-navbar @auth with-sidebar @endauth">
+
         @livewire('navigation-menu')
 
         <!-- Page Content -->
@@ -32,7 +35,6 @@
             {{ $slot }}
         </main>
 
-        @stack('modals')
 
         @livewireScripts
 

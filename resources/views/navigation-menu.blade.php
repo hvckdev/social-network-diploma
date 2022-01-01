@@ -1,10 +1,10 @@
 <nav class="navbar">
     @auth
-    <div class="navbar-content">
-        <button id="toggle-sidebar-btn" class="btn btn-action" type="button" onclick="halfmoon.toggleSidebar()">
-            <i class="fa fa-bars" aria-hidden="true"></i>
-        </button>
-    </div>
+        <div class="navbar-content">
+            <button id="toggle-sidebar-btn" class="btn btn-action" type="button" onclick="halfmoon.toggleSidebar()">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
     @endauth
     <a href="{{ config('app.url') }}" class="navbar-brand ml-10 ml-sm-20">
         <span class="d-none d-sm-flex">{{ config('app.name') }}</span>
@@ -26,8 +26,8 @@
                 <!-- w-250 = width: 25rem (250px), w-sm-350 = width: 35rem (350px) only on devices where width > 576px -->
                 <div class="dropdown-content p-20"> <!-- p-20 = padding: 2rem (20px) -->
                     @auth
-                        <h6 class="dropdown-header">Logged as {{ auth()->user()->name }}</h6>
-                        <a href="#" class="dropdown-item">Show profile</a>
+                        <h6 class="dropdown-header">{{ auth()->user()->name }}</h6>
+                        <a href="{{ route('users.show', auth()->user()->id) }}" class="dropdown-item">Show profile</a>
                         <a href="{{ route('profile.show') }}" class="dropdown-item">Edit profile</a>
                         <div class="dropdown-divider"></div>
                         <a href="{{ route('logout') }}" class="dropdown-item"
@@ -90,34 +90,76 @@
             <h5 class="sidebar-title">Your place</h5>
             <div class="sidebar-divider"></div>
             <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <span class="sidebar-icon">
+                <i class="fa-regular fa-chart-line"></i>
+            </span>
                 {{ __('Dashboard') }}
             </x-jet-nav-link>
             <br/>
             <h5 class="sidebar-title">Information</h5>
             <div class="sidebar-divider"></div>
             <x-jet-nav-link href="#">
+                            <span class="sidebar-icon">
+              <i class="fa-regular fa-calendar-check"></i>
+            </span>
                 {{ __('Schedule') }}
             </x-jet-nav-link>
             <br/>
             <h5 class="sidebar-title">Group</h5>
             <div class="sidebar-divider"></div>
             <x-jet-nav-link href="#">
+                            <span class="sidebar-icon">
+                <i class="fa-regular fa-campground"></i>
+            </span>
                 {{ __('Show your group') }}
             </x-jet-nav-link>
             <x-jet-nav-link href="#">
+                            <span class="sidebar-icon">
+                <i class="fa-regular fa-pen-to-square"></i>
+            </span>
                 {{ __('Edit your group') }}
             </x-jet-nav-link>
             <br/>
             <h5 class="sidebar-title">Your community</h5>
             <div class="sidebar-divider"></div>
             <x-jet-nav-link href="#">
+                            <span class="sidebar-icon">
+                <i class="fa-solid fa-user-group"></i>
+            </span>
                 {{ __('Friends') }}
             </x-jet-nav-link>
             <x-jet-nav-link href="#">
+                            <span class="sidebar-icon">
+               <i class="fa-regular fa-inbox"></i>
+            </span>
                 {{ __('Messages') }}
             </x-jet-nav-link>
             <x-jet-nav-link href="#">
+                            <span class="sidebar-icon">
+                <i class="fa-solid fa-comments"></i>
+            </span>
                 {{ __('Communities') }}
+            </x-jet-nav-link>
+            <br/>
+            <h5 class="sidebar-title">Other</h5>
+            <div class="sidebar-divider"></div>
+            <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                            <span class="sidebar-icon">
+                <i class="fa-solid fa-users"></i>
+            </span>
+                {{ __('All users') }}
+            </x-jet-nav-link>
+            <x-jet-nav-link href="#">
+                            <span class="sidebar-icon">
+                <i class="fa-regular fa-user-group"></i>
+            </span>
+                {{ __('All groups') }}
+            </x-jet-nav-link>
+            <x-jet-nav-link href="#">
+                            <span class="sidebar-icon">
+                <i class="fa-solid fa-layer-group"></i>
+            </span>
+                {{ __('All communities') }}
             </x-jet-nav-link>
         </div>
     </div>

@@ -13,14 +13,15 @@
 <!-- Modal -->
 @push('modals')
 <div
+    class="modal"
     x-data="{
         show: @entangle($attributes->wire('model')).defer,
     }"
     x-init="() => {
-        let el = document.getElementById('modal-id-{{ $id }}')
+        let el = document.querySelector('modal-id-{{ $id }}')
 
         $watch('show', value => {
-                el.classList.toggle('show')
+                halfmoon.toggleModal('modal-id-{{ $id }}')
             }
         });
 }
@@ -31,7 +32,6 @@
     wire:ignore.self
     tabindex="-1"
     id="modal-id-{{ $id }}"
-    aria-labelledby="modal-id-{{ $id }}"
     x-ref="modal-id-{{ $id }}"
     role="dialog"
 >
