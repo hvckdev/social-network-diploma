@@ -62,9 +62,9 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function information(): BelongsTo
+    public function information(): HasMany
     {
-        return $this->belongsTo(UserInformation::class);
+        return $this->hasMany(UserInformation::class);
     }
 
     public function friends(): BelongsToMany
@@ -87,5 +87,45 @@ class User extends Authenticatable
     public function communities(): HasMany
     {
         return $this->hasMany(Community::class);
+    }
+
+    public function fullNameAttribute(): string
+    {
+        return $this->information[0]->first_name.' '.$this->information[0]->middle_name.' '.$this->information[0]->last_name;
+    }
+
+    function friendsOfMine(): BelongsToMany
+    {
+        return $this->belongsToMany('User', 'friends', 'user_id', 'friend_id')
+            ->wherePivot('accepted', '=', 1) // to filter only accepted
+            ->withPivot('accepted'); // or to fetch accepted value
+    }
+
+    function friendOf(): BelongsToMany
+    {
+        return $this->belongsToMany('User', 'friends', 'friend_id', 'user_id')
+            ->wherePivot('accepted', '=', 1)
+            ->withPivot('accepted');
+    }
+
+    public function getFriendsAttribute()
+    {
+        if (!array_key_exists('friends', $this->relations)) $this->loadFriends();
+
+        return $this->getRelation('friends');
+    }
+
+    protected function loadFriends()
+    {
+        if (!array_key_exists('friends', $this->relations)) {
+            $friends = $this->mergeFriends();
+
+            $this->setRelation('friends', $friends);
+        }
+    }
+
+    protected function mergeFriends()
+    {
+        return $this->friendsOfMine->merge($this->friendOf);
     }
 }

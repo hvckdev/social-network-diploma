@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+        <x-slot name="title">
+            Authentication
         </x-slot>
 
         <div class="card-body">
@@ -33,11 +33,9 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                        <x-jet-checkbox id="remember_me" name="remember" />
-                        <label class="custom-control-label" for="remember_me">
-                            {{ __('Remember Me') }}
-                        </label>
+                    <div class="custom-switch">
+                        <input type="checkbox" id="remember" name="remember_me">
+                        <label for="remember">Remember me</label>
                     </div>
                 </div>
 

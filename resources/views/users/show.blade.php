@@ -9,8 +9,8 @@
             <div class="col-sm card">
                 <div class="card-title">{{ $user->name }}</div>
                 <div class="card-body">
-                    <p>Full name: Daniil Mikhailovich Kirsanov</p>
-                    <p>Group: <a href="#">PDO-44</a></p>
+                    <p>Full name: {{ $user->full_name }}</p>
+                    <p>Group: <a href="#">soon</a></p>
                     <div class="text-center mt-20">
                         <button class="btn btn-sm" onclick="halfmoon.toggleModal('modal-6')">Show full</button>
                     </div>
@@ -27,9 +27,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h5 class="modal-title">Full information</h5>
-                    <p>Country: Russia</p>
-                    <p>City: Ulyanovsk</p>
-                    <p>Website: <a href="https://hvck.su">hvck.su</a></p>
+                    <p>Country: {{ $user->information[0]->country }}</p>
+                    <p>City: {{ $user->information[0]->city }}</p>
+                    <p>Website: <a href="{{ $user->information[0]->website }}">{{ $user->information[0]->website }}</a></p>
                     <div class="text-right mt-20">
                         <!-- text-right = text-align: right, mt-20 = margin-top: 2rem (20px) -->
                         <button class="btn mr-5" data-dismiss="modal" type="button">Close</button>

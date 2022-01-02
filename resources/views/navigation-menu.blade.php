@@ -58,7 +58,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="custom-switch">
-                                    <input type="checkbox" id="remember">
+                                    <input type="checkbox" id="remember" name="remember_me">
                                     <label for="remember">Remember me</label>
                                 </div>
                             </div>
