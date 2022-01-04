@@ -19,8 +19,8 @@ class UpdateUserVisitDate
      */
     public function handle(Request $request, Closure $next)
     {
-        if(! empty($request->user()->information[0]->visited_at))
-            $request->user()->information[0]->update(['visited_at' => \Illuminate\Support\Facades\Date::now()]);
+        if(! empty($request->user()->information->visited_at))
+            $request->user()->information()->update(['visited_at' => \Illuminate\Support\Facades\Date::now()]);
 
         return $next($request);
     }
