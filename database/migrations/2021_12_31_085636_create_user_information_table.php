@@ -30,7 +30,7 @@ class CreateUserInformationTable extends Migration
             $table->boolean('show_email')->default(0);
             $table->boolean('show_website')->default(0);
             $table->boolean('show_birthday')->default(0);
-            $table->dateTime('visited_at')->default(Date::now());
+            $table->dateTime('visited_at')->useCurrent();
             $table->timestamps();
         });
     }

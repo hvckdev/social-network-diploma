@@ -16,7 +16,8 @@ class MustProvideInformation
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user() && empty($request->user()->information[0]))
+//        dd($request->user()->information->first_name);
+        if (auth()->user() && empty($request->user()->information->first_name))
             if ($request->routeIs('user-info.create', 'user-info.store') === false)
                 return redirect()->route('user-info.create');
             else

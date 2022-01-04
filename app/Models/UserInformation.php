@@ -12,8 +12,10 @@ class UserInformation extends Model
 
     protected $fillable = [
         'first_name', 'middle_name', 'last_name', 'birthday', 'city', 'country', 'website', 'show_middle_name',
-        'show_birthday', 'show_city', 'show_country', 'show_email', 'show_website', 'visited_at',
+        'show_birthday', 'show_city', 'show_country', 'show_email', 'show_website', 'visited_at'
     ];
+
+    protected $dates = ['visited_at'];
 
     public function user(): BelongsTo
     {

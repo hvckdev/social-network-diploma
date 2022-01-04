@@ -5,14 +5,14 @@
         <form action=..." method="...">
             <div class="form-group">
                 <label for="name" class="required">Nickname</label>
-                <input type="text" class="form-control" id="name" placeholder="Nickname"
+                <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" placeholder="Nickname"
                        required="required">
             </div>
 
             <div class="form-row row-eq-spacing-sm">
                 <div class="col-sm">
                     <label for="email" class="required">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email" value=""
+                    <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" placeholder="Email"
                            required="required">
                 </div>
             </div>
@@ -20,16 +20,16 @@
             <div class="form-row row-eq-spacing-sm">
                 <div class="col-sm">
                     <label for="first-name" class="required">First name</label>
-                    <input type="text" class="form-control" id="first-name" placeholder="First name"
+                    <input type="text" class="form-control" id="first-name" name="first_name" value="{{ $user->information->first_name }}" placeholder="First name"
                            required="required">
                 </div>
                 <div class="col-sm">
-                    <label for="last-name">Middle name</label>
-                    <input type="text" class="form-control" id="last-name" placeholder="Middle name">
+                    <label for="middle-name">Middle name</label>
+                    <input type="text" class="form-control" id="middle-name" name="middle_name" value="{{ $user->information->middle_name }}" placeholder="Middle name">
                 </div>
                 <div class="col-sm">
                     <label for="last-name" class="required">Last name</label>
-                    <input type="text" class="form-control" id="last-name" placeholder="Last name"
+                    <input type="text" class="form-control" id="last-name" name="last_name" value="{{ $user->information->last_name }}" placeholder="Last name"
                            required="required">
                 </div>
             </div>
@@ -41,16 +41,9 @@
                 <!-- Second row -->
                 <div class="form-row row-eq-spacing">
                     <div class="col">
-                        <input type="text" class="form-control" id="day-of-birth" placeholder="Day"
-                               pattern="[0-9]*" inputmode="numeric" required="required">
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="month-of-birth" placeholder="Month"
-                               pattern="[0-9]*" inputmode="numeric" required="required">
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="year-of-birth" placeholder="Year"
-                               pattern="[0-9]*" inputmode="numeric" required="required">
+                        <input type="date" class="form-control" id="birthday"
+                               value="{{ $user->information->birthday }}" placeholder="Birthday"
+                               required="required">
                     </div>
                 </div>
             </div>
@@ -58,18 +51,20 @@
             <div class="form-row row-eq-spacing-sm">
                 <div class="col-sm">
                     <label for="country" class="required">Country</label>
-                    <input type="text" class="form-control" id="country" placeholder="Country">
+                    <input type="text" class="form-control" id="country" name="country"
+                           value="{{ $user->information->country }}" placeholder="Country">
                 </div>
                 <div class="col-sm">
                     <label for="city" class="required">City</label>
-                    <input type="text" class="form-control" id="city" placeholder="City" required="required">
+                    <input type="text" class="form-control" id="city" name="city"
+                           value="{{ $user->information->city }}" placeholder="City" required="required">
                 </div>
             </div>
 
             <div class="form-row row-eq-spacing-sm">
                 <div class="col-sm">
                     <label for="website">Website</label>
-                    <input type="text" class="form-control" id="website" placeholder="Website">
+                    <input type="text" class="form-control" id="website" name="website" value="{{ $user->information->website }}" placeholder="Website">
                 </div>
             </div>
 

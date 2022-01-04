@@ -7,6 +7,7 @@
                 </div>
             </div>
             <div class="col-sm card">
+                <p class="float-right text-muted">{{ $user->information->visited_at->diffForHumans() }}</p>
                 <div class="card-title">{{ $user->name }}</div>
                 <div class="card-body">
                     <p>Full name: {{ $user->full_name }}</p>
@@ -27,9 +28,10 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h5 class="modal-title">Full information</h5>
-                    <p>Country: {{ $user->information[0]->country }}</p>
-                    <p>City: {{ $user->information[0]->city }}</p>
-                    <p>Website: <a href="{{ $user->information[0]->website }}">{{ $user->information[0]->website }}</a></p>
+                    <p>Birthday: {{ $user->information->show_birthday ? $user->information->birthday : 'Hidden' }}</p>
+                    <p>Country: {{ $user->information->show_contry ? $user->information->country : 'Hidden'}}</p>
+                    <p>City: {{ $user->information->show_city ? $user->information->city : 'Hidden' }}</p>
+                    <p>Website: <a href="{{ $user->information->show_website ? $user->information->website : 'Hidden'}}">{{ $user->information->website }}</a></p>
                     <div class="text-right mt-20">
                         <!-- text-right = text-align: right, mt-20 = margin-top: 2rem (20px) -->
                         <button class="btn mr-5" data-dismiss="modal" type="button">Close</button>

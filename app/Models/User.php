@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -62,9 +63,9 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function information(): HasMany
+    public function information(): HasOne
     {
-        return $this->hasMany(UserInformation::class);
+        return $this->hasOne(UserInformation::class);
     }
 
     public function friends(): BelongsToMany
@@ -89,9 +90,9 @@ class User extends Authenticatable
         return $this->hasMany(Community::class);
     }
 
-    public function fullNameAttribute(): string
+    public function getFullNameAttribute(): string
     {
-        return $this->information[0]->first_name.' '.$this->information[0]->middle_name.' '.$this->information[0]->last_name;
+        return "{$this->information->first_name} {$this->information->middle_name} {$this->information->last_name}";
     }
 
     function friendsOfMine(): BelongsToMany

@@ -4,7 +4,7 @@
             Registration
         </x-slot>
 
-        <x-jet-validation-errors class=form-group/>
+        <x-jet-validation-errors class="mb-3 rounded-0" />
 
             <div class="card-body">
                 <form method="POST" action="{{ route('user-info.store') }}">
@@ -43,7 +43,8 @@
                         <div class="col">
                             <x-jet-label value="{{ __('Date of birth') }}" class="required"/>
 
-                            <x-jet-input class="{{ $errors->has('birthday') ? 'is-invalid' : '' }}" placeholder="Date of birth"
+                            <x-jet-input class="{{ $errors->has('birthday') ? 'is-invalid' : '' }}"
+                                         placeholder="Date of birth"
                                          type="date" name="birthday"
                                          :value="old('birthday')" required autofocus autocomplete="birthday"/>
                             <x-jet-input-error for="birthday"></x-jet-input-error>
