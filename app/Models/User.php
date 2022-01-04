@@ -90,6 +90,11 @@ class User extends Authenticatable
         return $this->hasMany(Community::class);
     }
 
+    public function getIsFullRegisteredAttribute(): bool
+    {
+        return empty($this->information->first_name) !== false;
+    }
+
     public function getFullNameAttribute(): string
     {
         return "{$this->information->first_name} {$this->information->middle_name} {$this->information->last_name}";
