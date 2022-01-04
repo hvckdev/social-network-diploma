@@ -1,8 +1,9 @@
 <x-app-layout>
     <x-card-layout>
         <x-slot name="title">Edit Profile Information</x-slot>
-
-        <form action=..." method="...">
+        <x-jet-validation-errors class="mb-3 rounded-0" />
+        <form action="{{ route('update-user-information', $user->id) }}" method="POST">
+            @csrf
             <div class="form-group">
                 <label for="name" class="required">Nickname</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" placeholder="Nickname"
@@ -41,7 +42,7 @@
                 <!-- Second row -->
                 <div class="form-row row-eq-spacing">
                     <div class="col">
-                        <input type="date" class="form-control" id="birthday"
+                        <input type="date" class="form-control" id="birthday" name="birthday"
                                value="{{ $user->information->birthday }}" placeholder="Birthday"
                                required="required">
                     </div>
