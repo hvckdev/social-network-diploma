@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Jetstream;
 
 use App\Http\Requests\EditProfileInformationRequest;
 use App\Http\Requests\EditProfileRequest;
+use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
-class UserProfileController extends \Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController
+class   UserProfileController extends \Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController
 {
     /**
      * Show the user profile screen.
@@ -24,10 +28,32 @@ class UserProfileController extends \Laravel\Jetstream\Http\Controllers\Livewire
         ]);
     }
 
-    public function editProfileInformation(EditProfileRequest $profileRequest, EditProfileInformationRequest $profileInformationRequest, User $user): \Illuminate\Http\RedirectResponse
+    /**
+     * Update user profile information.
+     *
+     * @param EditProfileRequest $profileRequest
+     * @param EditProfileInformationRequest $profileInformationRequest
+     * @return RedirectResponse
+     */
+    public function updateUserProfileInformation(EditProfileRequest $profileRequest, EditProfileInformationRequest $profileInformationRequest): RedirectResponse
     {
-        $user->update($profileRequest->validated());
-        $user->information()->update($profileInformationRequest->validated());
+        Auth::user()->update($profileRequest->validated());
+        Auth::user()->information()->update($profileInformationRequest->validated());
+
+        return redirect()->route('profile.show');
+    }
+
+    /**
+     * Update user's password.
+     *
+     * @param UpdateUserPasswordRequest $request
+     * @return RedirectResponse
+     */
+    public function updateUserPassword(UpdateUserPasswordRequest $request): RedirectResponse
+    {
+        Auth::user()->update([
+            'password' => Hash::make($request->validated()['password']),
+        ]);
 
         return redirect()->route('profile.show');
     }

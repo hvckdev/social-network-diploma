@@ -26,8 +26,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     // Jetstream
-    Route::post('user/{user}/update-information', [UserProfileController::class, 'editProfileInformation'])
-    ->name('update-user-information');
+    Route::post('user/profile/update-information', [UserProfileController::class, 'updateUserProfileInformation'])
+        ->name('update-user-information');
+    Route::post('user/profile/update-password', [UserProfileController::class, 'updateUserPassword'])
+        ->name('update-user-password');
 
     // Users
     Route::resource('user-info', UserInformationController::class);

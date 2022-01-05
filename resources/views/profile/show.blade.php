@@ -1,19 +1,21 @@
 <x-app-layout>
     <x-card-layout>
         <x-slot name="title">Edit Profile Information</x-slot>
-        <x-jet-validation-errors class="mb-3 rounded-0" />
+        <x-jet-validation-errors class="mb-3 rounded-0"/>
         <form action="{{ route('update-user-information', $user->id) }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="name" class="required">Nickname</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" placeholder="Nickname"
+                <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}"
+                       placeholder="Nickname"
                        required="required">
             </div>
 
             <div class="form-row row-eq-spacing-sm">
                 <div class="col-sm">
                     <label for="email" class="required">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" placeholder="Email"
+                    <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}"
+                           placeholder="Email"
                            required="required">
                 </div>
             </div>
@@ -21,16 +23,19 @@
             <div class="form-row row-eq-spacing-sm">
                 <div class="col-sm">
                     <label for="first-name" class="required">First name</label>
-                    <input type="text" class="form-control" id="first-name" name="first_name" value="{{ $user->information->first_name }}" placeholder="First name"
+                    <input type="text" class="form-control" id="first-name" name="first_name"
+                           value="{{ $user->information->first_name }}" placeholder="First name"
                            required="required">
                 </div>
                 <div class="col-sm">
                     <label for="middle-name">Middle name</label>
-                    <input type="text" class="form-control" id="middle-name" name="middle_name" value="{{ $user->information->middle_name }}" placeholder="Middle name">
+                    <input type="text" class="form-control" id="middle-name" name="middle_name"
+                           value="{{ $user->information->middle_name }}" placeholder="Middle name">
                 </div>
                 <div class="col-sm">
                     <label for="last-name" class="required">Last name</label>
-                    <input type="text" class="form-control" id="last-name" name="last_name" value="{{ $user->information->last_name }}" placeholder="Last name"
+                    <input type="text" class="form-control" id="last-name" name="last_name"
+                           value="{{ $user->information->last_name }}" placeholder="Last name"
                            required="required">
                 </div>
             </div>
@@ -65,7 +70,8 @@
             <div class="form-row row-eq-spacing-sm">
                 <div class="col-sm">
                     <label for="website">Website</label>
-                    <input type="text" class="form-control" id="website" name="website" value="{{ $user->information->website }}" placeholder="Website">
+                    <input type="text" class="form-control" id="website" name="website"
+                           value="{{ $user->information->website }}" placeholder="Website">
                 </div>
             </div>
 
@@ -79,11 +85,14 @@
     <x-card-layout>
         <x-slot name="title">Edit Password</x-slot>
 
-        <form>
+        <form action="{{ route('update-user-password') }}" method="POST">
+            @csrf
+            <x-jet-validation-errors class="mb-3 rounded-0"/>
             <div class="form-row row-eq-spacing-sm">
                 <div class="col-sm">
                     <label for="current-password" class="required">Current password</label>
-                    <input type="password" class="form-control" id="current-password" placeholder="Current password"
+                    <input type="password" name="current_password" class="form-control" id="current-password"
+                           placeholder="Current password" autocomplete="current_password"
                            required="required">
                 </div>
             </div>
@@ -92,13 +101,13 @@
                 <div class="col-sm">
                     <label for="password" class="required">New password</label>
                     <input type="password" class="form-control" id="password" placeholder="New password"
-                           required="required">
+                           required="required" name="password">
                 </div>
 
                 <div class="col-sm">
                     <label for="password-confirmation" class="required">Password confirmation</label>
                     <input type="password" class="form-control" id="password-confirmation"
-                           placeholder="Password confirmation" required="required">
+                           placeholder="Password confirmation" required="required" name="password_confirmation">
                 </div>
             </div>
             <div class="text-right"> <!-- text-right = text-align: right -->
