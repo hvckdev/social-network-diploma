@@ -3,21 +3,22 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class MustProvideInformation
 {
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return Response|RedirectResponse
      */
     public function handle(Request $request, Closure $next)
     {
-//        dd($request->user()->information->first_name);
-        if (auth()->user() && empty($request->user()->information->first_name))
+        if (auth()->user() && ! $request->user()->is_full_registered)
             if ($request->routeIs('user-info.create', 'user-info.store') === false)
                 return redirect()->route('user-info.create');
             else

@@ -44,11 +44,11 @@
                     <h5 class="modal-title">Full information</h5>
                     <p>
                         <span class="small text-muted">Birthday</span><br>
-                        {{ $user->information->show_birthday }}
+                        {{ $user->information->show_birthday ? $user->information->birthday : 'Hidden' }}
                     </p>
                     <p>
                         <span class="small text-muted">Country</span><br>
-                        {{ $user->information->show_contry }}
+                        {{ $user->information->show_country ? $user->information->country : 'Hidden' }}
                     </p>
                     <p>
                         <span class="small text-muted">City</span><br>
@@ -56,8 +56,8 @@
                     </p>
                     <p>
                         <span class="small text-muted">Website</span><br>
-                        <a href="{{ $user->information->show_website ?? '#' }}">
-                            {{ $user->information->website ?? 'Empty :(' }}
+                        <a href="{{ $user->information->show_website ? $user->information->website ?? '#' : '#' }}">
+                            {{ $user->information->show_website ? $user->information->website ?? 'Empty :(' : 'Hidden' }}
                         </a>
                     </p>
                     <div class="text-right mt-20">

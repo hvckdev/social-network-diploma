@@ -14,12 +14,12 @@ class UpdateUserVisitDate
      * Handle an incoming request.
      *
      * @param Request $request
-     * @param Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @param Closure $next
      * @return Response|RedirectResponse
      */
     public function handle(Request $request, Closure $next)
     {
-        if(! empty($request->user()->information->visited_at))
+        if($request->user()->is_full_registered)
             $request->user()->information()->update(['visited_at' => \Illuminate\Support\Facades\Date::now()]);
 
         return $next($request);

@@ -92,12 +92,12 @@ class User extends Authenticatable
 
     public function getIsFullRegisteredAttribute(): bool
     {
-        return empty($this->information->first_name) !== false;
+        return empty($this->information->first_name) !== true;
     }
 
     public function getFullNameAttribute(): string
     {
-        return "{$this->information->first_name} {$this->information->middle_name} {$this->information->last_name}";
+        return "{$this->information->first_name} ".($this->information->show_middle_name ? $this->information->middle_name : '')." {$this->information->last_name}";
     }
 
     function friendsOfMine(): BelongsToMany
