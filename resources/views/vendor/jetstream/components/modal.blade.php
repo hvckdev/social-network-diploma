@@ -12,20 +12,24 @@
 @endphp
 <!-- Modal -->
 @push('modals')
-<div
-    class="modal"
+<div class="modal"
     x-data="{
         show: @entangle($attributes->wire('model')).defer,
     }"
     x-init="() => {
-        let el = document.querySelector('modal-id-{{ $id }}')
+        let el = document.querySelector('#modal-id-{{ $id }}')
 
         $watch('show', value => {
-                halfmoon.toggleModal('modal-id-{{ $id }}')
+            if (value) {
+            console.log('modal opened')
+                halfmoon.toggleModal('#modal-id-{{ $id }}')
+            } else {
+                halfmoon.toggleModal('#modal-id-{{ $id }}')
             }
         });
-}
-        el.addEventListener('classList.remove', function (event) {
+
+        el.addEventListener('toggleModal', function (event) {
+            console.log('modal opened')
           show = false
         })
     }"
@@ -33,8 +37,8 @@
     tabindex="-1"
     id="modal-id-{{ $id }}"
     x-ref="modal-id-{{ $id }}"
-    role="dialog"
->
+    role="dialog">
+
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <button class="close" data-dismiss="modal" type="button" aria-label="Close">

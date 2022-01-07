@@ -1,1 +1,4 @@
-<input type="checkbox" {!! $attributes->merge(['class' => 'form-check-input']) !!}>
+<input type="hidden">
+<input type="checkbox">
+
+

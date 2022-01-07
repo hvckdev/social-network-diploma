@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Checked;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EditProfileInformationRequest extends FormRequest
@@ -30,7 +31,13 @@ class EditProfileInformationRequest extends FormRequest
             'birthday' => 'required|date',
             'country' => 'required|string|max:255',
             'city' => 'required|string|max:255',
-            'website' => 'max:255'
+            'website' => 'max:255',
+            'show_website' => ['boolean'],
+            'show_middle_name' => 'boolean',
+            'show_birthday' => 'boolean',
+            'show_email' => 'boolean',
+            'show_country' => 'boolean',
+            'show_city' => 'boolean'
         ];
     }
 }

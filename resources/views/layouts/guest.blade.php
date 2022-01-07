@@ -23,7 +23,9 @@
     <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
 
 </head>
-<body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="true" data-set-preferred-mode-onload="true">>
+
+<body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true"
+      data-sidebar-shortcut-enabled="true" data-set-preferred-mode-onload="true">
 @stack('modals')
 
 <div class="page-wrapper with-navbar @auth with-sidebar @endauth">
@@ -34,7 +36,6 @@
     <main class="content-wrapper">
         {{ $slot }}
     </main>
-
 
     @livewireScripts
 

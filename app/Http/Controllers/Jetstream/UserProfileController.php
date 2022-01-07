@@ -5,14 +5,13 @@ namespace App\Http\Controllers\Jetstream;
 use App\Http\Requests\EditProfileInformationRequest;
 use App\Http\Requests\EditProfileRequest;
 use App\Http\Requests\UpdateUserPasswordRequest;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
-class   UserProfileController extends \Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController
+class UserProfileController extends \Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController
 {
     /**
      * Show the user profile screen.

@@ -2,7 +2,7 @@
     <x-card-layout>
         <x-slot name="title">Edit Profile Information</x-slot>
         <x-jet-validation-errors class="mb-3 rounded-0"/>
-        <form action="{{ route('update-user-information', $user->id) }}" method="POST">
+        <form action="{{ route('update-user-information') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="name" class="required">Nickname</label>
@@ -14,9 +14,24 @@
             <div class="form-row row-eq-spacing-sm">
                 <div class="col-sm">
                     <label for="email" class="required">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}"
-                           placeholder="Email"
-                           required="required">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <!-- Checkbox with empty label -->
+                                <div class="custom-checkbox" data-toggle="tooltip"
+                                     data-title="This checkbox does email public.">
+                                    <x-forms.checkbox id="show-email"
+                                                      name="show_email"
+                                                      :value="$user->information->show_email"
+                                    />
+                                    <label for="show-email" class="blank"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}"
+                               placeholder="Email"
+                               required="required">
+                    </div>
                 </div>
             </div>
 
@@ -29,8 +44,23 @@
                 </div>
                 <div class="col-sm">
                     <label for="middle-name">Middle name</label>
-                    <input type="text" class="form-control" id="middle-name" name="middle_name"
-                           value="{{ $user->information->middle_name }}" placeholder="Middle name">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <!-- Checkbox with empty label -->
+                                <div class="custom-checkbox" data-toggle="tooltip"
+                                     data-title="This checkbox does middle name public.">
+                                    <x-forms.checkbox id="show-middle-name"
+                                                      name="show_middle_name"
+                                                      :value="$user->information->show_middle_name"
+                                    />
+                                    <label for="show-middle-name" class="blank"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" id="middle-name" name="middle_name"
+                               value="{{ $user->information->middle_name }}" placeholder="Middle name">
+                    </div>
                 </div>
                 <div class="col-sm">
                     <label for="last-name" class="required">Last name</label>
@@ -43,13 +73,28 @@
             <!-- Second row container -->
             <div>
                 <!-- Label -->
-                <label for="day-of-birth" class="required">Date of birth</label>
+                <label for="birthday" class="required">Date of birth</label>
                 <!-- Second row -->
                 <div class="form-row row-eq-spacing">
                     <div class="col">
-                        <input type="date" class="form-control" id="birthday" name="birthday"
-                               value="{{ $user->information->birthday }}" placeholder="Birthday"
-                               required="required">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <!-- Checkbox with empty label -->
+                                    <div class="custom-checkbox" data-toggle="tooltip"
+                                         data-title="This checkbox does birthday public.">
+                                        <x-forms.checkbox id="show_birthday"
+                                                          name="show_birthday"
+                                                          :value="$user->information->show_birthday"
+                                        />
+                                        <label for="show_birthday" class="blank"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="date" class="form-control" id="birthday" name="birthday"
+                                   value="{{ $user->information->birthday }}" placeholder="Birthday"
+                                   required="required">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,21 +102,66 @@
             <div class="form-row row-eq-spacing-sm">
                 <div class="col-sm">
                     <label for="country" class="required">Country</label>
-                    <input type="text" class="form-control" id="country" name="country"
-                           value="{{ $user->information->country }}" placeholder="Country">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <!-- Checkbox with empty label -->
+                                <div class="custom-checkbox" data-toggle="tooltip"
+                                     data-title="This checkbox does country public.">
+                                    <x-forms.checkbox id="show-country"
+                                                      name="show_country"
+                                                      :value="$user->information->show_country"
+                                    />
+                                    <label for="show-country" class="blank"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" id="country" name="country"
+                               value="{{ $user->information->country }}" placeholder="Country">
+                    </div>
                 </div>
                 <div class="col-sm">
                     <label for="city" class="required">City</label>
-                    <input type="text" class="form-control" id="city" name="city"
-                           value="{{ $user->information->city }}" placeholder="City" required="required">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <!-- Checkbox with empty label -->
+                                <div class="custom-checkbox" data-toggle="tooltip"
+                                     data-title="This checkbox does city public.">
+                                    <x-forms.checkbox id="show_city"
+                                                      name="show_city"
+                                                      :value="$user->information->show_city"
+                                    />
+                                    <label for="show-city" class="blank"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" id="city" name="city"
+                               value="{{ $user->information->city }}" placeholder="City" required="required">
+                    </div>
                 </div>
             </div>
 
             <div class="form-row row-eq-spacing-sm">
                 <div class="col-sm">
                     <label for="website">Website</label>
-                    <input type="text" class="form-control" id="website" name="website"
-                           value="{{ $user->information->website }}" placeholder="Website">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <!-- Checkbox with empty label -->
+                                <div class="custom-checkbox" data-toggle="tooltip"
+                                     data-title="This checkbox does website public.">
+                                    <x-forms.checkbox id="show-website"
+                                                      name="show_website"
+                                                      :value="$user->information->show_website"
+                                    />
+                                    <label for="show-website" class="blank"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" id="website" name="website"
+                               value="{{ $user->information->website }}" placeholder="Website">
+                    </div>
                 </div>
             </div>
 
@@ -114,76 +204,5 @@
                 <button class="btn btn-primary" type="submit" value="Submit">Change password</button>
             </div>
         </form>
-    </x-card-layout>
-
-    <x-card-layout>
-        <x-slot name="title">2FA</x-slot>
-
-        <div class="form-row row-eq-spacing-sm">
-        </div>
-        <div class="text-right"> <!-- text-right = text-align: right -->
-            <button class="btn btn-primary" type="submit" value="Submit">Enable</button>
-        </div>
-    </x-card-layout>
-
-    <x-card-layout>
-        <x-slot name="title">Your sessions</x-slot>
-
-        {{--        @if (count(auth()->user()->sessions) > 0)--}}
-        {{--            <div class="form-group">--}}
-        {{--                <!-- Other Browser Sessions -->--}}
-        {{--                @foreach ($this->sessions as $session)--}}
-        {{--                    <div class="d-flex">--}}
-        {{--                        <div>--}}
-        {{--                            @if ($session->agent->isDesktop())--}}
-        {{--                                <svg fill="none" width="32" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="text-muted">--}}
-        {{--                                    <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>--}}
-        {{--                                </svg>--}}
-        {{--                            @else--}}
-        {{--                                <svg xmlns="http://www.w3.org/2000/svg" width="32" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="text-muted">--}}
-        {{--                                    <path d="M0 0h24v24H0z" stroke="none"></path><rect x="7" y="4" width="10" height="16" rx="1"></rect><path d="M11 5h2M12 17v.01"></path>--}}
-        {{--                                </svg>--}}
-        {{--                            @endif--}}
-        {{--                        </div>--}}
-
-        {{--                        <div class="ms-2">--}}
-        {{--                            <div>--}}
-        {{--                                {{ $session->agent->platform() }} - {{ $session->agent->browser() }}--}}
-        {{--                            </div>--}}
-
-        {{--                            <div>--}}
-        {{--                                <div class="small font-weight-lighter text-muted">--}}
-        {{--                                    {{ $session->ip_address }},--}}
-
-        {{--                                    @if ($session->is_current_device)--}}
-        {{--                                        <span class="text-success font-weight-bold">{{ __('This device') }}</span>--}}
-        {{--                                    @else--}}
-        {{--                                        {{ __('Last active') }} {{ $session->last_active }}--}}
-        {{--                                    @endif--}}
-        {{--                                </div>--}}
-        {{--                            </div>--}}
-        {{--                        </div>--}}
-        {{--                    </div>--}}
-        {{--                @endforeach--}}
-        {{--            </div>--}}
-        {{--        @endif--}}
-
-        <div class="text-right"> <!-- text-right = text-align: right -->
-            <button class="btn btn-primary" type="submit" value="Submit">Terminate all sessions</button>
-        </div>
-    </x-card-layout>
-
-    <x-card-layout>
-        <x-slot name="title">Privacy</x-slot>
-
-        <form>
-            <div class="form-row row-eq-spacing-sm">
-
-            </div>
-        </form>
-
-        <div class="text-right"> <!-- text-right = text-align: right -->
-            <button class="btn btn-primary" type="submit" value="Submit">Save</button>
-        </div>
     </x-card-layout>
 </x-app-layout>

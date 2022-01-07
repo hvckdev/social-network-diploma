@@ -17,6 +17,15 @@ class UserInformation extends Model
 
     protected $dates = ['visited_at'];
 
+    protected $casts = [
+        'show_middle_name' => 'boolean',
+        'show_birthday' => 'boolean',
+        'show_city' => 'boolean',
+        'show_country' => 'boolean',
+        'show_email' => 'boolean',
+        'show_website' => 'boolean'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
