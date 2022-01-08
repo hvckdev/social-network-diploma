@@ -25,7 +25,11 @@
                     </p>
                     <p>
                         <span class="small text-muted">Group</span><br>
-                        <a href="#">soon</a></p>
+                        <a
+                            href="{{ $user->information->group->id ?? false ? route('groups.show', $user->information->group->id) : '#' }}">
+                            {{ $user->information->group->name ?? 'Not in group' }}
+                        </a>
+                    </p>
                     <div class="text-center mt-20">
                         <button class="btn btn-sm" onclick="halfmoon.toggleModal('modal-6')">Show full</button>
                     </div>

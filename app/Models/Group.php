@@ -11,6 +11,8 @@ class Group extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'curator_id', 'course'];
+
     public function curator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'curator_id');
@@ -18,6 +20,6 @@ class Group extends Model
 
     public function users(): HasMany
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(UserInformation::class);
     }
 }

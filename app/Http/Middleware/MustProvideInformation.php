@@ -13,19 +13,20 @@ class MustProvideInformation
      * Handle an incoming request.
      *
      * @param Request $request
-     * @param Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @param Closure $next
      * @return Response|RedirectResponse
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user() && ! $request->user()->is_full_registered)
-            if ($request->routeIs('user-info.create', 'user-info.store') === false)
+        if (($request->user()->is_full_registered ?? true) === false)
+            if ($request->routeIs('user-info.create', 'user-info.store', 'logout') === false)
                 return redirect()->route('user-info.create');
             else
                 return $next($request);
 
-        if(auth()->user() && $request->routeIs('user-info.create', 'user-info.store'))
+        elseif (auth()->user() && $request->routeIs('user-info.create', 'user-info.store'))
             return redirect()->route('profile.show');
+
 
         return $next($request);
     }

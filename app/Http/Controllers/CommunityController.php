@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Community;
+use App\Models\Group;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CommunityController extends Controller
@@ -20,7 +25,7 @@ class CommunityController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
@@ -30,10 +35,10 @@ class CommunityController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         //
     }
@@ -41,7 +46,7 @@ class CommunityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Community  $community
+     * @param \App\Models\Community $community
      * @return \Illuminate\Http\Response
      */
     public function show(Community $community)
@@ -52,7 +57,7 @@ class CommunityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Community  $community
+     * @param \App\Models\Community $community
      * @return \Illuminate\Http\Response
      */
     public function edit(Community $community)
@@ -63,8 +68,8 @@ class CommunityController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Community  $community
+     * @param Request $request
+     * @param \App\Models\Community $community
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Community $community)
@@ -75,7 +80,7 @@ class CommunityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Community  $community
+     * @param \App\Models\Community $community
      * @return \Illuminate\Http\Response
      */
     public function destroy(Community $community)

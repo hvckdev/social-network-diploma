@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Jetstream\UserProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserInformationController;
@@ -34,4 +35,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     // Users
     Route::resource('user-info', UserInformationController::class);
     Route::resource('users', UserController::class);
+
+    // Group
+    Route::resource('groups', GroupController::class);
+    Route::post('groups/{group}/add-users', [GroupController::class, 'addUserToGroup'])
+        ->name('groups.add-users');
 });

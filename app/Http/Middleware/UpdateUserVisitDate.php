@@ -19,7 +19,7 @@ class UpdateUserVisitDate
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->user()->is_full_registered)
+        if($request->user()->is_full_registered ?? false)
             $request->user()->information()->update(['visited_at' => \Illuminate\Support\Facades\Date::now()]);
 
         return $next($request);

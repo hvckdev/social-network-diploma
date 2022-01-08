@@ -43,22 +43,24 @@
                         <form action="{{ route('login') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="username" class="required">Username</label>
+                                <label for="username" class="required">Email</label>
                                 <input type="text" name="email"
                                        class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                                       placeholder="Username"
+                                       placeholder="Email"
                                        required="required">
+                                <x-jet-input-error for="email"></x-jet-input-error>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="required">Password</label>
-                                <input type="password" name="password"
+                                <input id="password" type="password" name="password"
                                        class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
                                        placeholder="Password"
                                        required="required">
                             </div>
                             <div class="form-group">
                                 <div class="custom-switch">
-                                    <input type="checkbox" id="remember" name="remember_me">
+                                    <input type="hidden" name="remember_me" value="0">
+                                    <input type="checkbox" id="remember" name="remember_me" value="1">
                                     <label for="remember">Remember me</label>
                                 </div>
                             </div>
@@ -95,33 +97,6 @@
             </span>
                 {{ __('Dashboard') }}
             </x-jet-nav-link>
-            <br/>
-            <h5 class="sidebar-title">Information</h5>
-            <div class="sidebar-divider"></div>
-            <x-jet-nav-link href="#">
-                            <span class="sidebar-icon">
-              <i class="fa-regular fa-calendar-check"></i>
-            </span>
-                {{ __('Schedule') }}
-            </x-jet-nav-link>
-            <br/>
-            <h5 class="sidebar-title">Group</h5>
-            <div class="sidebar-divider"></div>
-            <x-jet-nav-link href="#">
-                            <span class="sidebar-icon">
-                <i class="fa-regular fa-campground"></i>
-            </span>
-                {{ __('Show your group') }}
-            </x-jet-nav-link>
-            <x-jet-nav-link href="#">
-                            <span class="sidebar-icon">
-                <i class="fa-regular fa-pen-to-square"></i>
-            </span>
-                {{ __('Edit your group') }}
-            </x-jet-nav-link>
-            <br/>
-            <h5 class="sidebar-title">Your community</h5>
-            <div class="sidebar-divider"></div>
             <x-jet-nav-link href="#">
                             <span class="sidebar-icon">
                 <i class="fa-solid fa-user-group"></i>
@@ -141,6 +116,34 @@
                 {{ __('Communities') }}
             </x-jet-nav-link>
             <br/>
+            <h5 class="sidebar-title">Information</h5>
+            <div class="sidebar-divider"></div>
+            <x-jet-nav-link href="#">
+                            <span class="sidebar-icon">
+              <i class="fa-regular fa-calendar-check"></i>
+            </span>
+                {{ __('Schedule') }}
+            </x-jet-nav-link>
+            <br/>
+            <h5 class="sidebar-title">Group</h5>
+            <div class="sidebar-divider"></div>
+            @if((auth()->user()->information->group ?? null) !== null)
+                <x-jet-nav-link href="{{ route('groups.show', auth()->user()->information->group->id ?? 1) }}"
+                                :active="request()->routeIs('groups.show', auth()->user()->information->group->id ?? 1)">
+                            <span class=" sidebar-icon">
+                <i class="fa-regular fa-campground"></i>
+                </span>
+                    {{ __('Show your group') }}
+                </x-jet-nav-link>@endif
+            @can('edit-groups')
+                <x-jet-nav-link href="{{ route('groups.edit', auth()->user()->information->group->id ?? 1) }}"
+                                :active="request()->routeIs('groups.edit', auth()->user()->information->grxoup->id ?? 1)">
+                            <span class="sidebar-icon">
+                <i class="fa-regular fa-pen-to-square"></i>
+            </span>
+                    {{ __('Edit your group') }}
+                </x-jet-nav-link> @endcan
+            <br/>
             <h5 class="sidebar-title">Other</h5>
             <div class="sidebar-divider"></div>
             <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
@@ -149,7 +152,7 @@
             </span>
                 {{ __('All users') }}
             </x-jet-nav-link>
-            <x-jet-nav-link href="#">
+            <x-jet-nav-link href="{{ route('groups.index') }}" :active="request()->routeIs('groups.index')">
                             <span class="sidebar-icon">
                 <i class="fa-regular fa-user-group"></i>
             </span>

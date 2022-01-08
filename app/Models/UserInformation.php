@@ -11,7 +11,7 @@ class UserInformation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'first_name', 'middle_name', 'last_name', 'birthday', 'city', 'country', 'website', 'show_middle_name',
+        'group_id', 'first_name', 'middle_name', 'last_name', 'birthday', 'city', 'country', 'website', 'show_middle_name',
         'show_birthday', 'show_city', 'show_country', 'show_email', 'show_website', 'visited_at'
     ];
 
@@ -29,5 +29,10 @@ class UserInformation extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(Group::class);
     }
 }
