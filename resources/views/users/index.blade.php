@@ -15,7 +15,7 @@
                 <tr>
                     <th>{{ $user->id }}</th>
                     <td><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
-                    <td>{{ 'soon' }}</td>
+                    <td><a href="{{ route('groups.show', $user->information->group->id) }}">{{ $user->information->group->name }}</a></td>
                 </tr>
             @endforeach
         </x-slot>

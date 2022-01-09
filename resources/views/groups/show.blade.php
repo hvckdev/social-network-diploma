@@ -10,6 +10,7 @@
             @endcan
         </x-slot>
         <p><span class="text-muted small">Course</span><br>{{ $group->course }}</p>
+        <p><span class="text-muted small">Curator</span><br><a href="{{ route('users.show', $group->curator->id) }}">{{ $group->curator->name }}</a></p>
 
         <table class="table table-borderless">
             <thead>
