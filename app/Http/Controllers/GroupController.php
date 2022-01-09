@@ -11,7 +11,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class GroupController extends Controller
 {
@@ -20,7 +19,7 @@ class GroupController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View
     {
         $groups = Group::paginate(15);
 
@@ -32,7 +31,7 @@ class GroupController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View
     {
         $users = User::all();
 
@@ -58,7 +57,7 @@ class GroupController extends Controller
      * @param Group $group
      * @return Application|Factory|View
      */
-    public function show(Group $group)
+    public function show(Group $group): View
     {
         return view('groups.show', compact('group'));
     }
@@ -104,7 +103,13 @@ class GroupController extends Controller
     }
 
     // TODO: refactor this shame...
-    public function addUserToGroup(Request $request, Group $group)
+
+    /**
+     * @param Request $request
+     * @param Group $group
+     * @return RedirectResponse
+     */
+    public function addUserToGroup(Request $request, Group $group): RedirectResponse
     {
         foreach ($request->users as $user) {
             User::find($user)->information->update(['group_id' => $group->id]);

@@ -97,7 +97,7 @@
             </span>
                 {{ __('Dashboard') }}
             </x-jet-nav-link>
-            <x-jet-nav-link href="#">
+            <x-jet-nav-link href="{{ route('friends.index') }}" :active="request()->routeIs('friends.index')">
                             <span class="sidebar-icon">
                 <i class="fa-solid fa-user-group"></i>
             </span>

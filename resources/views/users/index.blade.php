@@ -15,7 +15,7 @@
                 <tr>
                     <th>{{ $user->id }}</th>
                     <td><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
-                    <td><a href="{{ route('groups.show', $user->information->group->id) }}">{{ $user->information->group->name }}</a></td>
+                    <td><a href="{{ ! empty($user->information->group->id) ? route('groups.show', $user->information->group->id) : '#' }}">{{ $user->information->group->name ?? 'Not in group' }}</a></td>
                 </tr>
             @endforeach
         </x-slot>

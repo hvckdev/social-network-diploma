@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FriendController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Jetstream\UserProfileController;
 use App\Http\Controllers\UserController;
@@ -25,7 +26,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'verified']], static function () {
     // Jetstream
     Route::post('user/profile/update-information', [UserProfileController::class, 'updateUserProfileInformation'])
         ->name('update-user-information');
@@ -35,6 +36,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     // Users
     Route::resource('user-info', UserInformationController::class);
     Route::resource('users', UserController::class);
+
+    // Friendship
+    Route::get('friends', [FriendController::class, 'index'])->name('friends.index');
 
     // Group
     Route::resource('groups', GroupController::class);

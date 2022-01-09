@@ -1,37 +1,68 @@
 <x-app-layout>
     <div class="content">
         <div class="row row-cols-2">
-            <div class="col-sm card">
-                <p class="float-right text-muted">{{ $user->information->visited_at->diffForHumans() }}</p>
-                <div class="card-title">{{ $user->name }}</div>
-                <div class="card-body">
-                    <p>
-                        <img src="{{ $user->profile_photo_url }}" alt=""
-                             class="w-lg-quarter shadow-sm rounded img-fluid">
-                    </p>
-                </div>
-                @can('update', $user)
-                    <div class="card-footer">
-                        <button class="btn w-full">Edit</button>
+            <div class="w-400 mw-full col-sm"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+                <div class="card p-0"> <!-- p-0 = padding: 0 -->
+                    <!-- Card header -->
+                    <div class="px-card py-10 border-bottom">
+                        <!-- py-10 = padding-top: 1rem (10px) and padding-bottom: 1rem (10px), border-bottom: adds a border on the bottom -->
+                        <h2 class="card-title font-size-18 m-0">
+                            <!-- font-size-18 = font-size: 1.8rem (18px), m-0 = margin: 0 -->
+                            {{ $user->name }} <span
+                                class="float-right small text-muted">last seen {{ $user->information->visited_at->diffForHumans() }}</span>
+                        </h2>
                     </div>
-                @endcan
+                    <!-- Content -->
+                    <div class="content">
+                        <div class="card-body text-center">
+                            <p>
+                                <img src="{{ $user->profile_photo_url }}" alt=""
+                                     class="w-lg-quarter shadow-sm rounded img-fluid">
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Card footer -->
+                    <div class="px-card py-10 bg-light-lm rounded-bottom text-center">
+                        <!-- py-10 = padding-top: 1rem (10px) and padding-bottom: 1rem (10px), bg-light-lm = background-color: var(--gray-color-light) only in light mode, bg-very-dark-dm = background-color: var(--dark-color-dark) only in dark mode, rounded-bottom = rounded corners on the bottom -->
+                        @can('update', $user)
+                            <button class="btn w-full">Edit</button>
+                        @endcan
+                        @if($user->id !== auth()->user()->id)
+                            <livewire:acquaintances.send-friend-request :recipient="$user" class="mw-full"/>
+                        @endif
+                    </div>
+                </div>
             </div>
-            <div class="col-sm card">
-                <div class="card-title">Information</div>
-                <div class="card-body">
-                    <p>
-                        <span class="small text-muted">Full name</span><br>
-                        {{ $user->full_name }}
-                    </p>
-                    <p>
-                        <span class="small text-muted">Group</span><br>
-                        <a
-                            href="{{ $user->information->group->id ?? false ? route('groups.show', $user->information->group->id) : '#' }}">
-                            {{ $user->information->group->name ?? 'Not in group' }}
-                        </a>
-                    </p>
-                    <div class="text-center mt-20">
-                        <button class="btn btn-sm" onclick="halfmoon.toggleModal('modal-6')">Show full</button>
+            <div class="w-400 mw-full col-sm"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+                <div class="card p-0"> <!-- p-0 = padding: 0 -->
+                    <!-- Card header -->
+                    <div class="px-card py-10 border-bottom">
+                        <!-- py-10 = padding-top: 1rem (10px) and padding-bottom: 1rem (10px), border-bottom: adds a border on the bottom -->
+                        <h2 class="card-title font-size-18 m-0">
+                            <!-- font-size-18 = font-size: 1.8rem (18px), m-0 = margin: 0 -->
+                            Information
+                        </h2>
+                    </div>
+                    <!-- Content -->
+                    <div class="content">
+                        <p>
+                            <span class="small text-muted">Full name</span><br>
+                            {{ $user->full_name }}
+                        </p>
+                        <p>
+                            <span class="small text-muted">Group</span><br>
+                            <a
+                                href="{{ $user->information->group->id ?? false ? route('groups.show', $user->information->group->id) : '#' }}">
+                                {{ $user->information->group->name ?? 'Not in group' }}
+                            </a>
+                        </p>
+                    </div>
+                    <!-- Card footer -->
+                    <div class="px-card py-10 bg-light-lm rounded-bottom">
+                        <!-- py-10 = padding-top: 1rem (10px) and padding-bottom: 1rem (10px), bg-light-lm = background-color: var(--gray-color-light) only in light mode, bg-very-dark-dm = background-color: var(--dark-color-dark) only in dark mode, rounded-bottom = rounded corners on the bottom -->
+                        <div class="text-center mt-20">
+                            <button class="btn btn-sm" onclick="halfmoon.toggleModal('modal-6')">Show full</button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Multicaret\Acquaintances\Traits\Friendable;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -22,6 +23,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use Friendable;
 
     /**
      * The attributes that are mass assignable.
@@ -69,13 +71,6 @@ class User extends Authenticatable
         return $this->hasOne(UserInformation::class);
     }
 
-    public function friends(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            User::class, 'friends', 'user_id', 'friend_id')
-            ->wherePivot('accepted', '=', 1);
-    }
-
     public function messages(): HasMany
     {
         return $this->hasMany(Message::class);
@@ -94,45 +89,5 @@ class User extends Authenticatable
     public function getIsFullRegisteredAttribute(): bool
     {
         return empty($this->information->first_name) !== true;
-    }
-
-    public function getFullNameAttribute(): string
-    {
-        return "{$this->information->first_name} ".($this->information->show_middle_name ? $this->information->middle_name : '')." {$this->information->last_name}";
-    }
-
-    function friendsOfMine(): BelongsToMany
-    {
-        return $this->belongsToMany('User', 'friends', 'user_id', 'friend_id')
-            ->wherePivot('accepted', '=', 1) // to filter only accepted
-            ->withPivot('accepted'); // or to fetch accepted value
-    }
-
-    function friendOf(): BelongsToMany
-    {
-        return $this->belongsToMany('User', 'friends', 'friend_id', 'user_id')
-            ->wherePivot('accepted', '=', 1)
-            ->withPivot('accepted');
-    }
-
-    public function getFriendsAttribute()
-    {
-        if (!array_key_exists('friends', $this->relations)) $this->loadFriends();
-
-        return $this->getRelation('friends');
-    }
-
-    protected function loadFriends()
-    {
-        if (!array_key_exists('friends', $this->relations)) {
-            $friends = $this->mergeFriends();
-
-            $this->setRelation('friends', $friends);
-        }
-    }
-
-    protected function mergeFriends()
-    {
-        return $this->friendsOfMine->merge($this->friendOf);
     }
 }

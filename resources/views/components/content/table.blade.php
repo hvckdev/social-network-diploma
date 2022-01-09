@@ -17,5 +17,5 @@
 </div>
 
 <div class="d-flex justify-content-center">
-    {{ $links }}
+    {{ $links ?? '' }}
 </div>
