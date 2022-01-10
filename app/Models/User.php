@@ -90,4 +90,11 @@ class User extends Authenticatable
     {
         return empty($this->information->first_name) !== true;
     }
+
+    public function getFullNameAttribute(): string
+    {
+        $middle_name = $this->information->show_middle_name ? $this->information->middle_name : '';
+
+        return "{$this->information->first_name} {$middle_name} {$this->information->last_name}";
+    }
 }

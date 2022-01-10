@@ -8,8 +8,8 @@
                         <!-- py-10 = padding-top: 1rem (10px) and padding-bottom: 1rem (10px), border-bottom: adds a border on the bottom -->
                         <h2 class="card-title font-size-18 m-0">
                             <!-- font-size-18 = font-size: 1.8rem (18px), m-0 = margin: 0 -->
-                            {{ $user->name }} <span
-                                class="float-right small text-muted">last seen {{ $user->information->visited_at->diffForHumans() }}</span>
+                            {{ $user->name }} <small
+                                class="float-right text-muted">last seen {{ $user->information->visited_at->diffForHumans() }}</small>
                         </h2>
                     </div>
                     <!-- Content -->
