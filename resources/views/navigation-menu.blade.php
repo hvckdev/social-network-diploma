@@ -102,6 +102,11 @@
                 <i class="fa-solid fa-user-group"></i>
             </span>
                 {{ __('Friends') }}
+                @if(auth()->user()->getFriendRequests()->first() !== null)
+                    <span class="ml-5 badge badge-danger badge-pill">
+                        {{ auth()->user()->getFriendRequests()->count() }}
+                    </span>
+                @endif
             </x-jet-nav-link>
             <x-jet-nav-link href="#">
                             <span class="sidebar-icon">

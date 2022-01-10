@@ -6,7 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 use Livewire\Redirector;
 
-class SendFriendRequest extends Component
+class ProfileFriendButton extends Component
 {
     public $user;
     public $recipient;
@@ -42,6 +42,6 @@ class SendFriendRequest extends Component
 
     public function render()
     {
-        return view('livewire.acquaintances.send-friend-request');
+        return view('livewire.acquaintances.profile-friend-button');
     }
 }

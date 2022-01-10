@@ -28,7 +28,7 @@
                             <button class="btn w-full">Edit</button>
                         @endcan
                         @if($user->id !== auth()->user()->id)
-                            <livewire:acquaintances.send-friend-request :recipient="$user" class="mw-full"/>
+                            <livewire:acquaintances.profile-friend-button :recipient="$user" class="mw-full"/>
                         @endif
                     </div>
                 </div>
