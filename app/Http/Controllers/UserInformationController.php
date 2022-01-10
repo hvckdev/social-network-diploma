@@ -38,10 +38,10 @@ class UserInformationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\UserInformation $userInformation
-     * @return \Illuminate\Http\Response
+     * @param UserInformation $userInformation
+     * @return void
      */
-    public function destroy(UserInformation $userInformation)
+    public function destroy(UserInformation $userInformation): void
     {
         //
     }

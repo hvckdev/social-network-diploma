@@ -2,13 +2,17 @@
 
 namespace App\Http\Livewire\Acquaintances;
 
+use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\Redirector;
 
 class FriendDeleteButton extends Component
 {
-    public $user;
-    public $friend;
+    public User $user;
+    public User $friend;
 
     public function __construct($id = null)
     {
@@ -24,7 +28,7 @@ class FriendDeleteButton extends Component
         return redirect()->to(route('friends.index'));
     }
 
-    public function render()
+    public function render(): Factory|View|Application
     {
         return view('livewire.acquaintances.friend-delete-button');
     }

@@ -1,5 +1,5 @@
 @if(! $this->user->isFriendWith($this->recipient))
-    @if(! $this->user->hasSentFriendRequestTo($this->recipient) && ! $this->user->hasFriendRequestFrom($this->recipient))
+    @if($this->user->canBefriend($this->recipient))
         <button type="submit" class="btn btn-primary btn-sm" wire:click="send">Send friend request</button>
     @elseif($this->user->hasFriendRequestFrom($this->recipient))
         <div class="btn-group" role="group" aria-label="Basic example">

@@ -17,7 +17,7 @@ class GroupController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Application|Factory|View
+     * @return View
      */
     public function index(): View
     {
@@ -29,7 +29,7 @@ class GroupController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Application|Factory|View
+     * @return View
      */
     public function create(): View
     {
@@ -55,7 +55,7 @@ class GroupController extends Controller
      * Display the specified resource.
      *
      * @param Group $group
-     * @return Application|Factory|View
+     * @return View
      */
     public function show(Group $group): View
     {
@@ -68,7 +68,7 @@ class GroupController extends Controller
      * @param Group $group
      * @return Application|Factory|View
      */
-    public function edit(Group $group)
+    public function edit(Group $group): View|Factory|Application
     {
         $users = User::all();
 

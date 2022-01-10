@@ -139,7 +139,10 @@
                 <i class="fa-regular fa-campground"></i>
                 </span>
                     {{ __('Show your group') }}
-                </x-jet-nav-link>@endif
+                </x-jet-nav-link>
+            @else
+                <small class="text-muted sidebar-content">You haven't been assigned to any group.</small>
+            @endif
             @can('edit-groups')
                 <x-jet-nav-link href="{{ route('groups.edit', auth()->user()->information->group->id ?? 1) }}"
                                 :active="request()->routeIs('groups.edit', auth()->user()->information->grxoup->id ?? 1)">
