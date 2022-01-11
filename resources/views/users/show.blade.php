@@ -1,8 +1,9 @@
 <x-app-layout>
     <div class="content">
+        <x-alert handled="friends" class="p-0 py-10"/>
         <div class="row row-cols-2">
             <div class="w-400 mw-full col-sm"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
-                <div class="card p-0"> <!-- p-0 = padding: 0 -->
+                <div class="card p-0">
                     <!-- Card header -->
                     <div class="px-card py-10 border-bottom">
                         <!-- py-10 = padding-top: 1rem (10px) and padding-bottom: 1rem (10px), border-bottom: adds a border on the bottom -->
@@ -24,15 +25,15 @@
                     <!-- Card footer -->
                     <div class="px-card py-10 bg-light-lm rounded-bottom text-center">
                         <!-- py-10 = padding-top: 1rem (10px) and padding-bottom: 1rem (10px), bg-light-lm = background-color: var(--gray-color-light) only in light mode, bg-very-dark-dm = background-color: var(--dark-color-dark) only in dark mode, rounded-bottom = rounded corners on the bottom -->
-                        @can('update', $user)
-                            <button class="btn w-full">Edit</button>
-                        @endcan
                         @if($user->id !== auth()->user()->id)
                             <livewire:acquaintances.profile-friend-button :recipient="$user" class="mw-full"/>
+                        @else
+                            <button class="btn w-full">Edit</button>
                         @endif
                     </div>
                 </div>
             </div>
+
             <div class="w-400 mw-full col-sm"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
                 <div class="card p-0"> <!-- p-0 = padding: 0 -->
                     <!-- Card header -->

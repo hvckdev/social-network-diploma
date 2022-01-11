@@ -5,7 +5,7 @@
                 <details class="collapse-panel mw-full">
                     <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
                     <summary class="collapse-header">
-                        Friend requests <span class="badge badge-danger badge-pill">{{ $requests->count() }}</span>
+                        Friend requests <livewire:acquaintances.components.requests-badge />
                     </summary>
                     <div class="collapse-content">
                         @foreach($requests as $request)

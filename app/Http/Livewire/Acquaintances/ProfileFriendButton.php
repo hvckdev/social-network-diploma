@@ -24,23 +24,35 @@ class ProfileFriendButton extends Component
     public function delete(): void
     {
         $this->user->unfriend($this->recipient);
+
+        session()->flash('message', 'You have successfully deleted friend ' . $this->recipient->name . '.');
     }
 
     public function send(): void
     {
-        $this->user->befriend($this->recipient);
+        if ($this->user->canBefriend($this->recipient)) {
+            $this->user->befriend($this->recipient);
+
+            session()->flash('message', 'Friend request has been sent to ' . $this->recipient->name . '.');
+        }
+        else {
+            $this->addError('friends', 'Add friend error!');
+        }
+
     }
 
-    public function accept(): Redirector
+    public function accept(): void
     {
         $this->user->acceptFriendRequest($this->recipient);
 
-        return redirect()->to(route('users.show', $this->recipient->id));
+        session()->flash('message', 'You have successfully added friend ' . $this->recipient->name . '.');
     }
 
     public function reject(): void
     {
         $this->user->denyFriendRequest($this->recipient);
+
+        session()->flash('message', 'You have successfully denied friend request from ' . $this->recipient->name . '.');
     }
 
     public function render(): Factory|View|Application

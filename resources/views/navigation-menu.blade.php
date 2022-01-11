@@ -102,11 +102,7 @@
                 <i class="fa-solid fa-user-group"></i>
             </span>
                 {{ __('Friends') }}
-                @if(auth()->user()->getFriendRequests()->first() !== null)
-                    <span class="ml-5 badge badge-danger badge-pill">
-                        {{ auth()->user()->getFriendRequests()->count() }}
-                    </span>
-                @endif
+                <livewire:acquaintances.components.requests-badge />
             </x-jet-nav-link>
             <x-jet-nav-link href="#">
                             <span class="sidebar-icon">
@@ -132,7 +128,7 @@
             <br/>
             <h5 class="sidebar-title">Group</h5>
             <div class="sidebar-divider"></div>
-            @if((auth()->user()->information->group ?? null) !== null)
+            @if(auth()->user()->information->in_group)
                 <x-jet-nav-link href="{{ route('groups.show', auth()->user()->information->group->id ?? 1) }}"
                                 :active="request()->routeIs('groups.show', auth()->user()->information->group->id ?? 1)">
                             <span class=" sidebar-icon">
@@ -140,17 +136,18 @@
                 </span>
                     {{ __('Show your group') }}
                 </x-jet-nav-link>
-            @else
-                <small class="text-muted sidebar-content">You haven't been assigned to any group.</small>
-            @endif
-            @can('edit-groups')
-                <x-jet-nav-link href="{{ route('groups.edit', auth()->user()->information->group->id ?? 1) }}"
-                                :active="request()->routeIs('groups.edit', auth()->user()->information->grxoup->id ?? 1)">
+
+                @can('edit-groups')
+                    <x-jet-nav-link href="{{ route('groups.edit', auth()->user()->information->group->id ?? 1) }}"
+                                    :active="request()->routeIs('groups.edit', auth()->user()->information->grxoup->id ?? 1)">
                             <span class="sidebar-icon">
                 <i class="fa-regular fa-pen-to-square"></i>
             </span>
-                    {{ __('Edit your group') }}
-                </x-jet-nav-link> @endcan
+                        {{ __('Edit your group') }}
+                    </x-jet-nav-link> @endcan
+            @else
+                <small class="text-muted sidebar-content">You haven't been assigned to any group.</small>
+            @endif
             <br/>
             <h5 class="sidebar-title">Other</h5>
             <div class="sidebar-divider"></div>

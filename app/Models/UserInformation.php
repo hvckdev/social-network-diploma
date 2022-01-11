@@ -35,4 +35,9 @@ class UserInformation extends Model
     {
         return $this->belongsTo(Group::class);
     }
+
+    public function getInGroupAttribute(): bool
+    {
+        return $this->group_id !== null || ($this->group->curator_id ?? null) === $this->user->id;
+    }
 }

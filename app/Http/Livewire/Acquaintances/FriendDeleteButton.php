@@ -25,6 +25,8 @@ class FriendDeleteButton extends Component
     {
         $this->user->unfriend($this->friend);
 
+        session()->flash('message', 'Friend successfully deleted');
+
         return redirect()->to(route('friends.index'));
     }
 

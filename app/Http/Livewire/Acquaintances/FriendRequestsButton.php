@@ -25,12 +25,16 @@ class FriendRequestsButton extends Component
     {
         $this->user->acceptFriendRequest($this->sender);
 
+        session()->flash('message', 'You have successfully added friend '.$this->sender->name.'.');
+
         return redirect()->to(route('friends.index'));
     }
 
     public function reject(): Redirector
     {
         $this->user->denyFriendRequest($this->sender);
+
+        session()->flash('message', 'You have successfully denied friend request from '.$this->sender->name.'.');
 
         return redirect()->to(route('friends.index'));
     }

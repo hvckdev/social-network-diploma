@@ -8,6 +8,7 @@
             <th>#</th>
             <th>Username</th>
             <th>Group</th>
+            <th>Action</th>
         </x-slot>
 
         <x-slot name="body">
@@ -16,6 +17,7 @@
                     <th>{{ $user->id }}</th>
                     <td><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
                     <td><a href="{{ ! empty($user->information->group->id) ? route('groups.show', $user->information->group->id) : '#' }}">{{ $user->information->group->name ?? 'Not in group' }}</a></td>
+                    <td><livewire:acquaintances.profile-friend-button :recipient="$user" /></td>
                 </tr>
             @endforeach
         </x-slot>
