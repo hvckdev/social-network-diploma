@@ -22,7 +22,11 @@ class BlogController extends Controller
     {
         $user = Auth::user();
 
-        return view('blog.index', compact('user'));
+        if ($user !== null) {
+            $articles = $user->blog->articles;
+        }
+
+        return view('blog.index', compact('user', 'articles'));
     }
 
     /**
@@ -46,7 +50,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        $articles = $blog->articles()->orderByDesc('id')->get();
+        $articles = $blog->articles()->orderByDesc('id')->paginate(10);
 
         return view('blog.show', compact('blog', 'articles'));
     }

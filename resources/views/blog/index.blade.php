@@ -7,8 +7,8 @@
                 </a>
             </div>
             <div class="row row-cols-2">
-                @if(! empty($user->blog->articles))
-                    @foreach($user->blog->articles as $article)
+                @if($articles !== null)
+                    @foreach($articles as $article)
                         <div class="col-sm-6">
                             <div class="content">
                                 <h2 class="content-title">
