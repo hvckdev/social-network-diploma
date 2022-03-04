@@ -38,6 +38,6 @@ class UserInformation extends Model
 
     public function getInGroupAttribute(): bool
     {
-        return $this->group_id !== null || ($this->group->curator_id ?? null) === $this->user->id;
+        return ! ($this->group_id === null) && $this->group->id === $this->group_id;
     }
 }

@@ -1,4 +1,4 @@
-<div wire:poll.visible>
+<div wire:poll.keep-alive>
     @if($this->user->id !== $this->recipient->id)
         @if(! $this->user->isFriendWith($this->recipient))
             @if($this->user->canBefriend($this->recipient))
@@ -15,5 +15,7 @@
         @else
             <button type="submit" class="btn btn-sm btn-danger" wire:click="delete">Delete a friend</button>
         @endif
+    @else
+        You
     @endif
 </div>

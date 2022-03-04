@@ -4,20 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMessagesTable extends Migration
+class CreateBlogsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('blogs', static function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('from_user_id')->index();
-            $table->unsignedBigInteger('to_user_id')->index();
-            $table->text('message');
+            $table->unsignedBigInteger('user_id')->index();
+            $table->boolean('is_closed')->default(1);
             $table->timestamps();
         });
     }
@@ -27,8 +26,8 @@ class CreateMessagesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('blogs');
     }
 }

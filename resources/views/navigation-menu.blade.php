@@ -15,9 +15,11 @@
             <span class="sr-only">Toggle dark mode</span>
         </button>
         <div class="dropdown">
-            <button class="btn btn-primary" data-toggle="dropdown" type="button" id="sign-in-dropdown-toggle-btn"
+            <button class="btn btn-primary text-center" data-toggle="dropdown" type="button"
+                    id="sign-in-dropdown-toggle-btn"
                     aria-haspopup="true" aria-expanded="false">
                 @auth
+                    <img src="{{ auth()->user()->profile_photo_url }}" alt="" width="15" height="15">
                     {{ auth()->user()->name }} @endauth @guest Sign in @endguest <i class="fa fa-angle-down ml-5"
                                                                                     aria-hidden="true"></i>
                 <!-- ml-5 = margin-left: 0.5rem (5px) -->
@@ -27,6 +29,7 @@
                 <div class="dropdown-content p-20"> <!-- p-20 = padding: 2rem (20px) -->
                     @auth
                         <h6 class="dropdown-header">{{ auth()->user()->name }}</h6>
+                        <hr class="dropdown-divider">
                         <a href="{{ route('users.show', auth()->user()->id) }}" class="dropdown-item">Show profile</a>
                         <a href="{{ route('profile.show') }}" class="dropdown-item">Edit profile</a>
                         <div class="dropdown-divider"></div>
@@ -60,7 +63,7 @@
                             <div class="form-group">
                                 <div class="custom-switch">
                                     <input type="hidden" name="remember_me" value="0">
-                                    <input type="checkbox" id="remember" name="remember_me" value="1">
+                                    <input type="checkbox" id="remember" name="remember_me" value="on">
                                     <label for="remember">Remember me</label>
                                 </div>
                             </div>
@@ -102,19 +105,21 @@
                 <i class="fa-solid fa-user-group"></i>
             </span>
                 {{ __('Friends') }}
-                <livewire:acquaintances.components.requests-badge />
+                <livewire:acquaintances.components.requests-badge/>
             </x-jet-nav-link>
-            <x-jet-nav-link href="#">
+            <x-jet-nav-link href="{{ route('threads.index') }}" :active="request()->routeIs('messages.index')">
                             <span class="sidebar-icon">
                <i class="fa-regular fa-inbox"></i>
             </span>
                 {{ __('Messages') }}
+                <livewire:messenger.components.unread-badge/>
             </x-jet-nav-link>
-            <x-jet-nav-link href="#">
+            <x-jet-nav-link href="{{ route('blog.index') }}">
                             <span class="sidebar-icon">
-                <i class="fa-solid fa-comments"></i>
+                                <i class="fa-brands fa-microblog"></i>
+
             </span>
-                {{ __('Communities') }}
+                {{ __('Your blog') }}
             </x-jet-nav-link>
             <br/>
             <h5 class="sidebar-title">Information</h5>
@@ -128,7 +133,7 @@
             <br/>
             <h5 class="sidebar-title">Group</h5>
             <div class="sidebar-divider"></div>
-            @if(auth()->user()->information->in_group)
+            @if(auth()->user()->information->in_group ?? false)
                 <x-jet-nav-link href="{{ route('groups.show', auth()->user()->information->group->id ?? 1) }}"
                                 :active="request()->routeIs('groups.show', auth()->user()->information->group->id ?? 1)">
                             <span class=" sidebar-icon">
@@ -136,18 +141,16 @@
                 </span>
                     {{ __('Show your group') }}
                 </x-jet-nav-link>
-
-                @can('edit-groups')
-                    <x-jet-nav-link href="{{ route('groups.edit', auth()->user()->information->group->id ?? 1) }}"
-                                    :active="request()->routeIs('groups.edit', auth()->user()->information->grxoup->id ?? 1)">
-                            <span class="sidebar-icon">
-                <i class="fa-regular fa-pen-to-square"></i>
-            </span>
-                        {{ __('Edit your group') }}
-                    </x-jet-nav-link> @endcan
             @else
                 <small class="text-muted sidebar-content">You haven't been assigned to any group.</small>
             @endif
+            @can('edit-groups')
+                <x-jet-nav-link href="{{ route('groups.edit', auth()->user()->information->group->id ?? 1) }}"
+                                :active="request()->routeIs('groups.edit', auth()->user()->information->group->id ?? 1)">
+                    <span class="sidebar-icon"><i class="fa-regular fa-pen-to-square"></i></span>
+                    {{ __('Edit your group') }}
+                </x-jet-nav-link>
+            @endcan
             <br/>
             <h5 class="sidebar-title">Other</h5>
             <div class="sidebar-divider"></div>
@@ -162,12 +165,6 @@
                 <i class="fa-regular fa-user-group"></i>
             </span>
                 {{ __('All groups') }}
-            </x-jet-nav-link>
-            <x-jet-nav-link href="#">
-                            <span class="sidebar-icon">
-                <i class="fa-solid fa-layer-group"></i>
-            </span>
-                {{ __('All communities') }}
             </x-jet-nav-link>
         </div>
     </div>

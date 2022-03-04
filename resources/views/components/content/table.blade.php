@@ -1,6 +1,5 @@
 <div class="content">
     <div class="card">
-        <x-alert />
         <div class="card-title">{{ $name }}</div>
         <div class="card-body">
             <table class="table table-hover table-borderless">

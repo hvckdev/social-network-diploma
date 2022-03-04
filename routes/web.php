@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Blog\ArticleController;
+use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Jetstream\UserProfileController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserInformationController;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', static function () {
     return view('welcome');
 });
 
@@ -40,8 +43,15 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], static function () 
     // Friendship
     Route::get('friends', [FriendController::class, 'index'])->name('friends.index');
 
+    // Messages
+    Route::resource('threads', MessageController::class);
+
     // Group
     Route::resource('groups', GroupController::class);
     Route::post('groups/{group}/add-users', [GroupController::class, 'addUserToGroup'])
         ->name('groups.add-users');
+
+    // Blog
+    Route::resource('blog', BlogController::class);
+    Route::resource('blog.article', ArticleController::class);
 });

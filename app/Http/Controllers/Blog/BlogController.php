@@ -1,35 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
-use App\Models\Community;
-use App\Models\Group;
+use App\Http\Controllers\Controller;
+use App\Models\Blog\Blog;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class CommunityController extends Controller
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
-        //
-    }
+        $user = Auth::user();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
-     */
-    public function create()
-    {
-        //
+        return view('blog.index', compact('user'));
     }
 
     /**
@@ -40,27 +33,31 @@ class CommunityController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        //
+        $request->user()->blog()->create();
+
+        return redirect()->route('blog.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Community $community
-     * @return \Illuminate\Http\Response
+     * @param Blog $blog
+     * @return Application|Factory|View
      */
-    public function show(Community $community)
+    public function show(Blog $blog)
     {
-        //
+        $articles = $blog->articles()->orderByDesc('id')->get();
+
+        return view('blog.show', compact('blog', 'articles'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Community $community
+     * @param Blog $blog
      * @return \Illuminate\Http\Response
      */
-    public function edit(Community $community)
+    public function edit(Blog $blog)
     {
         //
     }
@@ -69,10 +66,10 @@ class CommunityController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param \App\Models\Community $community
+     * @param Blog $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Community $community)
+    public function update(Request $request, Blog $blog)
     {
         //
     }
@@ -80,10 +77,10 @@ class CommunityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Community $community
+     * @param Blog $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Community $community)
+    public function destroy(Blog $blog)
     {
         //
     }

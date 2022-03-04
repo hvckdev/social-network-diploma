@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-use Cmgmyr\Messenger\Traits\Messagable;
+use App\Models\Blog\Blog;
+use App\Models\Messenger\Message;
+use App\Traits\Messagable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -23,8 +25,8 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
-    use Messagable;
     use Friendable;
+    use Messagable;
 
     /**
      * The attributes that are mass assignable.
@@ -82,14 +84,24 @@ class User extends Authenticatable
         return $this->belongsTo(Group::class);
     }
 
-    public function communities(): HasMany
+    public function blog(): HasOne
     {
-        return $this->hasMany(Community::class);
+        return $this->hasOne(Blog::class);
     }
 
     public function getIsFullRegisteredAttribute(): bool
     {
         return empty($this->information->first_name) !== true;
+    }
+
+    public function getHasBlogAttribute(): bool
+    {
+        return $this->blog()->exists();
+    }
+
+    public function getIsGroupCuratorAttribute()
+    {
+        //
     }
 
     public function getFullNameAttribute(): string

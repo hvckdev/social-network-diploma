@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class' => 'mb-10']) }}>
+<div {{ $attributes->merge(['class' => 'mb-10']) }} >
     @if (session()->has('message'))
         <div class="alert alert-success">
             <h4 class="alert-heading">Success!</h4>

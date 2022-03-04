@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Message;
+use App\Models\Messenger\Message;
+use App\Models\Messenger\Thread;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -10,11 +14,11 @@ class MessageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): Application|Factory|View
     {
-        //
+        return view('messages.index');
     }
 
     /**
@@ -41,18 +45,18 @@ class MessageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Message  $message
-     * @return \Illuminate\Http\Response
+     * @param Thread $thread
+     * @return Application|Factory|View
      */
-    public function show(Message $message)
+    public function show(Thread $thread): View|Factory|Application
     {
-        //
+        return view('messages.show', compact('thread'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Message  $message
+     * @param Message $message
      * @return \Illuminate\Http\Response
      */
     public function edit(Message $message)
@@ -64,7 +68,7 @@ class MessageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Message  $message
+     * @param Message $message
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Message $message)
@@ -75,7 +79,7 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Message  $message
+     * @param Message $message
      * @return \Illuminate\Http\Response
      */
     public function destroy(Message $message)

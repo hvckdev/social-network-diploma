@@ -1,4 +1,8 @@
 <x-app-layout>
+    <div class="content">
+        <x-alert />
+    </div>
+
     <x-content.table>
         <x-slot name="name">
             Users

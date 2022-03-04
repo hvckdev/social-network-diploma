@@ -21,16 +21,14 @@
         <!-- Scripts -->
         <script src="https://kit.fontawesome.com/9c68ecdcd7.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
-
+        @stack('head-scripts')
     </head>
 
     <body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true"
           data-sidebar-shortcut-enabled="true" data-set-preferred-mode-onload="true">
-        @stack('modals')
-
         <div class="page-wrapper with-navbar @auth with-sidebar @endauth">
             @livewire('navigation-menu')
-
+            @stack('modals')
             <!-- Page Content -->
             <main class="content-wrapper">
                 {{ $slot }}

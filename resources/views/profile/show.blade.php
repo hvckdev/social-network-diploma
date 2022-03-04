@@ -1,5 +1,9 @@
 <x-app-layout>
     <x-card-layout>
+        <x-slot name="title">Edit profile photo</x-slot>
+        <livewire:profile.edit-profile-photo />
+    </x-card-layout>
+    <x-card-layout>
         <x-slot name="title">Edit Profile Information</x-slot>
         <x-jet-validation-errors class="mb-3 rounded-0"/>
         <form action="{{ route('update-user-information') }}" method="POST">
