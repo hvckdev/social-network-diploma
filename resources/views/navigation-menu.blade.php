@@ -63,7 +63,7 @@
                             <div class="form-group">
                                 <div class="custom-switch">
                                     <input type="hidden" name="remember_me" value="0">
-                                    <input type="checkbox" id="remember" name="remember_me" value="on">
+                                    <input type="checkbox" id="remember" name="remember" value="on">
                                     <label for="remember">Remember me</label>
                                 </div>
                             </div>
