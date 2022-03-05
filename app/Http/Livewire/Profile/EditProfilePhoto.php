@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -13,14 +15,30 @@ class EditProfilePhoto extends Component
 {
     use WithFileUploads;
 
+    /**
+     * @var mixed
+     */
     public $photo;
+
+    /**
+     * @var array
+     */
+    public array $state = [];
+
+    /**
+     * @var User
+     */
     public User $user;
 
-    public function __construct($id = null)
+    /**
+     * Prepare the component
+     *
+     * @return void
+     */
+    public function mount(): void
     {
-        parent::__construct($id);
-
-        $this->user = auth()->user();
+        $this->user = Auth::user();
+        $this->state = Auth::user()->withoutRelations()->toArray();
     }
 
     public function render(): Factory|View|Application
@@ -28,12 +46,23 @@ class EditProfilePhoto extends Component
         return view('livewire.profile.edit-profile-photo');
     }
 
-    public function store(): void
+    public function store(UpdatesUserProfileInformation $updater)
     {
-        $this->validate([
-            'photo' => 'image|max:1024'
-        ]);
+        $this->resetErrorBag();
 
-        $this->user->updateProfilePhoto($this->photo);
+        $updater->update(
+            Auth::user(),
+            $this->photo
+                ? array_merge($this->state, ['photo' => $this->photo])
+                : $this->state
+        );
+
+        if (isset($this->photo)) {
+            return redirect()->route('profile.show');
+        }
+
+        $this->emit('saved');
+
+        $this->emit('refresh-navigation-menu');
     }
 }
