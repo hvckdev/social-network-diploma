@@ -23,7 +23,7 @@ class BlogController extends Controller
         $user = Auth::user();
 
         if ($user !== null) {
-            $articles = $user->blog->articles;
+            $articles = $user->blog->articles ?? null;
         }
 
         return view('blog.index', compact('user', 'articles'));

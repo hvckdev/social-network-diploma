@@ -1,10 +1,15 @@
 <x-app-layout>
     @if($user->has_blog)
         <div class="card">
-            <div class="card-header text-right">
-                <a href="{{ route('blog.article.create', $user->blog->id) }}" class="btn btn-primary">
-                    Create article
-                </a>
+            <div class="card-header">
+                <h5>Your blog
+                    <span class="float-right">
+                        <a href="{{ route('blog.article.create', $user->blog->id) }}"
+                           class="btn btn-primary">
+                        Create article
+                    </a>
+                    </span>
+                </h5>
             </div>
             <div class="row row-cols-2">
                 @if($articles !== null)
@@ -23,7 +28,8 @@
                                         {{ $article->created_at }}
                                     </small>
                                 </div>
-                                <a href="{{ route('blog.article.show', [$user->blog, $article]) }}" class="btn btn-primary">Go to article</a>
+                                <a href="{{ route('blog.article.show', [$user->blog, $article]) }}"
+                                   class="btn btn-primary">Go to article</a>
                             </div>
                         </div>
                     @endforeach
