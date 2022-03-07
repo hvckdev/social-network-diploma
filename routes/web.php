@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\Blog\ArticleController;
 use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\FriendController;
@@ -50,6 +51,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], static function () 
     Route::resource('groups', GroupController::class);
     Route::post('groups/{group}/add-users', [GroupController::class, 'addUserToGroup'])
         ->name('groups.add-users');
+    Route::resource('groups.announcements', AnnouncementController::class);
 
     // Blog
     Route::resource('blog', BlogController::class);

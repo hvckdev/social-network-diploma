@@ -36,8 +36,19 @@ class UserInformation extends Model
         return $this->belongsTo(Group::class);
     }
 
+    public function getCuratedGroup(): \Illuminate\Database\Eloquent\Builder
+    {
+        return Group::query()->where('curator_id', '=', $this->user->id);
+    }
+
     public function getInGroupAttribute(): bool
     {
-        return ! ($this->group_id === null) && $this->group->id === $this->group_id;
+        return (!($this->group_id === null) && ($this->group->id === $this->group_id))
+            || $this->getCuratedGroup()->exists();
+    }
+
+    public function getCuratedGroupIdAttribute()
+    {
+        return $this->getCuratedGroup()->exists() ? $this->getCuratedGroup()->first()->id : 0;
     }
 }

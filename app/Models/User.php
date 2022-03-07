@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Blog\Blog;
 use App\Models\Messenger\Message;
 use App\Traits\Messagable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -99,9 +100,16 @@ class User extends Authenticatable
         return $this->blog()->exists();
     }
 
-    public function getIsGroupCuratorAttribute()
+    public static function inGroup($group_id): Collection|array
     {
-        //
+        return UserInformation::query()->where('group_id', '=', $group_id)
+            ->with('User')->get();
+    }
+
+    public static function notInGroup($group_id): Collection|array
+    {
+        return UserInformation::query()->where('group_id', '!=', $group_id)->orWhereNull('group_id')
+            ->with('User')->get();
     }
 
     public function getFullNameAttribute(): string

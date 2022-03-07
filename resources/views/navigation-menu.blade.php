@@ -134,23 +134,25 @@
             <h5 class="sidebar-title">Group</h5>
             <div class="sidebar-divider"></div>
             @if(auth()->user()->information->in_group ?? false)
-                <x-jet-nav-link href="{{ route('groups.show', auth()->user()->information->group->id ?? 1) }}"
-                                :active="request()->routeIs('groups.show', auth()->user()->information->group->id ?? 1)">
+                <x-jet-nav-link
+                    href="{{ route('groups.show', auth()->user()->information->group->id ?? auth()->user()->information->curated_group_id)  }}"
+                    :active="request()->routeIs('groups.show', auth()->user()->information->group->id ?? auth()->user()->information->curated_group_id)">
                             <span class=" sidebar-icon">
                 <i class="fa-regular fa-campground"></i>
                 </span>
                     {{ __('Show your group') }}
                 </x-jet-nav-link>
+                @can('edit-groups')
+                    <x-jet-nav-link
+                        href="{{ route('groups.edit', auth()->user()->information->group->id ?? auth()->user()->information->curated_group_id) }}"
+                        :active="request()->routeIs('groups.edit', auth()->user()->information->group->id ?? auth()->user()->information->curated_group_id)">
+                        <span class="sidebar-icon"><i class="fa-regular fa-pen-to-square"></i></span>
+                        {{ __('Edit your group') }}
+                    </x-jet-nav-link>
+                @endcan
             @else
                 <small class="text-muted sidebar-content">You haven't been assigned to any group.</small>
             @endif
-            @can('edit-groups')
-                <x-jet-nav-link href="{{ route('groups.edit', auth()->user()->information->group->id ?? 1) }}"
-                                :active="request()->routeIs('groups.edit', auth()->user()->information->group->id ?? 1)">
-                    <span class="sidebar-icon"><i class="fa-regular fa-pen-to-square"></i></span>
-                    {{ __('Edit your group') }}
-                </x-jet-nav-link>
-            @endcan
             <br/>
             <h5 class="sidebar-title">Other</h5>
             <div class="sidebar-divider"></div>

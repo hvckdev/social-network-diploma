@@ -11,10 +11,6 @@ class SendMessageMessengerForm extends Component
     public $content;
     public User $recipient;
 
-    protected array $rules = [
-        'content' => 'required'
-    ];
-
     public function send(): void
     {
         $thread = Thread::createOrFindThreadWithRecipient($this->recipient->id);

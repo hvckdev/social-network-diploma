@@ -19,7 +19,10 @@
             @foreach($users as $user)
                 <tr>
                     <th>{{ $user->id }}</th>
-                    <td><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
+                    <td>
+                        <img src="{{ $user->profile_photo_url }}" alt="" width="30" height="30">
+                        <a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a>
+                    </td>
                     <td><a href="{{ ! empty($user->information->group->id) ? route('groups.show', $user->information->group->id) : '#' }}">{{ $user->information->group->name ?? 'Not in group' }}</a></td>
                     <td><livewire:acquaintances.profile-friend-button :recipient="$user" /></td>
                 </tr>

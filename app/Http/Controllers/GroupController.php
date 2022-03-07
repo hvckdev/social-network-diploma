@@ -101,20 +101,4 @@ class GroupController extends Controller
 
         return redirect()->route('groups.index');
     }
-
-    // TODO: refactor this shame...
-
-    /**
-     * @param Request $request
-     * @param Group $group
-     * @return RedirectResponse
-     */
-    public function addUserToGroup(Request $request, Group $group): RedirectResponse
-    {
-        foreach ($request->users as $user) {
-            User::find($user)->information->update(['group_id' => $group->id]);
-        }
-
-        return redirect()->route('groups.edit', $group);
-    }
 }

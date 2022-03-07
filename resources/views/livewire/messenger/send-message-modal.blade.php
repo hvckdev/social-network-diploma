@@ -4,7 +4,7 @@
             <button class="close" data-dismiss="modal" type="button" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <h5 class="modal-title">Send message to {{ $recipient->name }}</h5>
+            <h5 class="modal-title">Send message to <img src="{{ $recipient->profile_photo_url }}" alt="" width="15" height="15"> {{ $recipient->name }}</h5>
             <form wire:submit.prevent="submit">
                 <label for="message">Message</label>
                 <textarea class="form-control" id="message" wire:model.lazy="text"

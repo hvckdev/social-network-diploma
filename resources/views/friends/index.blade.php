@@ -11,6 +11,7 @@
                     <div class="collapse-content">
                         @foreach($requests as $request)
                             <div>
+                                <img src="{{ $request->sender->profile_photo_url }}" alt="" width="30" height="30">
                                 <a href="{{ route('users.show', $request->sender) }}">{{ $request->sender->name }}</a>
                                 <div class="text-right">
                                     <livewire:acquaintances.friend-requests-button :sender="$request->sender"/>
@@ -41,7 +42,12 @@
                     @push('modals')
                         <livewire:messenger.send-message-modal :friend-id="$friend->id" :recipient="$friend"/>
                     @endpush
-                    <td><a href="{{ route('users.show', $friend) }}">{{ $friend->name }}</a></td>
+                    <td>
+                        <img src="{{ $friend->profile_photo_url }}" alt="" width="30" height="30">
+                        <a href="{{ route('users.show', $friend) }}">
+                            {{ $friend->name }}
+                        </a>
+                    </td>
                     <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal"
                            data-target="send-message-modal-{{ $friend->id }}">Send
                             message</a></td>

@@ -16,7 +16,7 @@
         <div class="col-sm">
             <label for="name">Course</label>
             <input type="number" min="1" max="4" class="form-control @error('course') is-invalid @enderror" id="course"
-                   name="course" value="{{ $course ?? '' }}" placeholder="Course"
+                   name="course" value="{{ $group->course ?? '' }}" placeholder="Course"
                    required="required"/>
             <x-jet-input-error for="name"></x-jet-input-error>
         </div>
@@ -27,7 +27,8 @@
             <select class="form-control @error('curator_id') is-invalid @enderror" id="curator" name="curator_id">
                 <option value="" selected="selected" disabled="disabled">Choose a curator...</option>
                 @foreach($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    <option @if($group->curator_id === $user->id) selected
+                            @endif value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
             </select>
             <x-jet-input-error for="curator_id"></x-jet-input-error>

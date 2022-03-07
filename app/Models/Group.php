@@ -18,6 +18,11 @@ class Group extends Model
         return $this->belongsTo(User::class, 'curator_id');
     }
 
+    public function announcements(): HasMany
+    {
+        return $this->hasMany(Announcement::class);
+    }
+
     public function users(): HasMany
     {
         return $this->hasMany(UserInformation::class);
