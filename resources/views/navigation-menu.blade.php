@@ -107,14 +107,14 @@
                 {{ __('Friends') }}
                 <livewire:acquaintances.components.requests-badge/>
             </x-jet-nav-link>
-            <x-jet-nav-link href="{{ route('threads.index') }}" :active="request()->routeIs('messages.index')">
+            <x-jet-nav-link href="{{ route('threads.index') }}" :active="request()->routeIs('threads.index')">
                             <span class="sidebar-icon">
                <i class="fa-regular fa-inbox"></i>
             </span>
                 {{ __('Messages') }}
                 <livewire:messenger.components.unread-badge/>
             </x-jet-nav-link>
-            <x-jet-nav-link href="{{ route('blog.index') }}">
+            <x-jet-nav-link href="{{ route('blog.index') }}" :active="request()->routeIs('blog.index')">
                             <span class="sidebar-icon">
                                 <i class="fa-brands fa-microblog"></i>
 
@@ -167,6 +167,12 @@
                 <i class="fa-regular fa-user-group"></i>
             </span>
                 {{ __('All groups') }}
+            </x-jet-nav-link>
+            <x-jet-nav-link href="{{ route('blogs') }}" :active="request()->routeIs('blogs')">
+                            <span class="sidebar-icon">
+                                <i class="fa-brands fa-microblog"></i>
+                            </span>
+                All of blogs
             </x-jet-nav-link>
         </div>
     </div>

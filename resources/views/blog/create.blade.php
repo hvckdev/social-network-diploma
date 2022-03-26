@@ -4,7 +4,7 @@
         @csrf
         <div class="form-group">
             <div class="custom-checkbox">
-                <input type="checkbox" id="checkbox-1" value="">
+                <input type="checkbox" id="checkbox-1" name="public" value="1">
                 <label for="checkbox-1">Make it public</label>
             </div>
         </div>

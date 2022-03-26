@@ -7,6 +7,7 @@ use App\Http\Requests\CreateArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Blog\Article;
 use App\Models\Blog\Blog;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -15,22 +16,15 @@ use Illuminate\Http\RedirectResponse;
 class ArticleController extends Controller
 {
     /**
-     * Create the controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->authorizeResource(Article::class);
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return Application|Factory|View
+     * @throws AuthorizationException
      */
     public function create(Blog $blog)
     {
+        $this->authorize('create', [Article::class, $blog]);
+
         return view('blog.article.create', compact('blog'));
     }
 
@@ -40,9 +34,12 @@ class ArticleController extends Controller
      * @param Blog $blog
      * @param CreateArticleRequest $request
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function store(Blog $blog, CreateArticleRequest $request): RedirectResponse
     {
+        $this->authorize('create', [Article::class, $blog]);
+
         $blog->articles()->create($request->validated());
 
         return redirect()->route('blog.index');

@@ -16,23 +16,23 @@ class ArticlePolicy
      * Determine whether the user can view any models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return Response
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): Response
     {
-        return true;
+        return Response::allow();
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param User $user
-     * @param  \App\Models\Article  $article
-     * @return Response|bool
+     * @param Article $article
+     * @return Response
      */
-    public function view(User $user, Article $article)
+    public function view(User $user, Article $article): Response
     {
-        return true;
+        return Response::allow();
     }
 
     /**
@@ -40,59 +40,78 @@ class ArticlePolicy
      *
      * @param User $user
      * @param Blog $blog
-     * @return bool
+     * @return Response
      */
-    public function create(User $user): bool
+    public function create(User $user, Blog $blog): Response
     {
-        return true;
+        if ($user->blog->id === $blog->id) {
+            return Response::allow();
+        }
+
+        return Response::deny('Not your blog!');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param User $user
-     * @param Blog $blog
      * @param Article $article
-     * @return bool
+     * @return Response
      */
-    public function update(User $user, Article $article): bool
+    public function update(User $user, Article $article): Response
     {
-        return $user->blog->id ?? '' === $article->blog->id;
+        if ($user->blog->id ?? '' === $article->blog->id) {
+            return Response::allow();
+        }
+
+        return Response::deny();
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param User $user
-     * @param  \App\Models\Article  $article
-     * @return Response|bool
+     * @param Article $article
+     * @return Response
      */
-    public function delete(User $user, Article $article)
+    public function delete(User $user, Article $article): Response
     {
-        //
+        if ($user->blog->id ?? '' === $article->blog->id) {
+            return Response::allow();
+        }
+
+        return Response::deny();
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param User $user
-     * @param  \App\Models\Article  $article
-     * @return Response|bool
+     * @param Article $article
+     * @return Response
      */
-    public function restore(User $user, Article $article)
+    public function restore(User $user, Article $article): Response
     {
-        //
+        if ($user->blog->id ?? '' === $article->blog->id) {
+            return Response::allow();
+        }
+
+        return Response::deny();
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param User $user
-     * @param  \App\Models\Article  $article
-     * @return Response|bool
+     * @param Article $article
+     * @return Response
      */
-    public function forceDelete(User $user, Article $article)
+    public function forceDelete(User $user, Article $article): Response
     {
-        //
+        if ($user->blog->id ?? '' === $article->blog->id) {
+            return Response::allow();
+        }
+
+        return Response::deny();
     }
 }

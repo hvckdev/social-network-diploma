@@ -14,7 +14,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
 
         <!-- Styles -->
-        <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+        <link href="{{ asset('css/halfmoon-variables.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('css/custom.css') }}">
         @livewireStyles
 

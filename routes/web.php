@@ -56,4 +56,5 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], static function () 
     // Blog
     Route::resource('blog', BlogController::class);
     Route::resource('blog.article', ArticleController::class);
+    Route::get('/blogs', [BlogController::class, 'showAll'])->name('blogs');
 });

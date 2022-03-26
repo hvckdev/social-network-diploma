@@ -21,19 +21,21 @@
             <x-jet-input-error for="name"></x-jet-input-error>
         </div>
     </div>
+
     <div class="form-row row-eq-spacing-sm">
         <div class="col-sm">
             <label for="curator">Curator</label>
             <select class="form-control @error('curator_id') is-invalid @enderror" id="curator" name="curator_id">
                 <option value="" selected="selected" disabled="disabled">Choose a curator...</option>
                 @foreach($users as $user)
-                    <option @if($group->curator_id === $user->id) selected
-                            @endif value="{{ $user->id }}">{{ $user->name }}</option>
+                    <option @isset($group) @if($group->curator_id  === $user->id) selected
+                            @endif @endisset value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
             </select>
             <x-jet-input-error for="curator_id"></x-jet-input-error>
         </div>
     </div>
+
 
     <div class="d-flex justify-content-end">
         <button type="submit" class="btn btn-dark">{{ $buttonName }}</button>

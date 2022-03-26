@@ -1,8 +1,8 @@
-<x-app-layout>
+    <x-app-layout>
     @if($user->has_blog)
         <div class="card">
             <div class="card-header">
-                <h5>Your blog
+                <h5>{{ request()->route()->getName() === 'blog.index' ? 'Your blog' : 'All of blogs' }}
                     <span class="float-right">
                         <a href="{{ route('blog.article.create', $user->blog->id) }}"
                            class="btn btn-primary">

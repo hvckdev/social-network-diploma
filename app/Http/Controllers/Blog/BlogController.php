@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog\Article;
 use App\Models\Blog\Blog;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -39,6 +40,10 @@ class BlogController extends Controller
     {
         $request->user()->blog()->create();
 
+        if ($request->input('public')) {
+            $request->user()->blog()->update(['is_closed' => false]);
+        }
+
         return redirect()->route('blog.index');
     }
 
@@ -53,6 +58,17 @@ class BlogController extends Controller
         $articles = $blog->articles()->orderByDesc('id')->paginate(10);
 
         return view('blog.show', compact('blog', 'articles'));
+    }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function showAll()
+    {
+        $articles = Article::whereRelation('blog', 'is_closed', '=', '0')->paginate();
+        $user = Auth::user();
+
+        return view('blog.index', compact('articles', 'user'));
     }
 
     /**
