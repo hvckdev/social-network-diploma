@@ -1,26 +1,24 @@
 <x-app-layout>
     @if($requests->first() !== null )
-        <div class="content">
-            <div class="card">
-                <details class="collapse-panel mw-full">
-                    <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
-                    <summary class="collapse-header">
-                        Friend requests
-                        <livewire:acquaintances.components.requests-badge/>
-                    </summary>
-                    <div class="collapse-content">
-                        @foreach($requests as $request)
-                            <div>
-                                <img src="{{ $request->sender->profile_photo_url }}" alt="" width="30" height="30">
-                                <a href="{{ route('users.show', $request->sender) }}">{{ $request->sender->name }}</a>
-                                <div class="text-right">
-                                    <livewire:acquaintances.friend-requests-button :sender="$request->sender"/>
-                                </div>
+        <div class="card">
+            <details class="collapse-panel mw-full">
+                <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+                <summary class="collapse-header">
+                    Friend requests
+                    <livewire:acquaintances.components.requests-badge/>
+                </summary>
+                <div class="collapse-content">
+                    @foreach($requests as $request)
+                        <div>
+                            <img src="{{ $request->sender->profile_photo_url }}" alt="" width="30" height="30">
+                            <a href="{{ route('users.show', $request->sender) }}">{{ $request->sender->name }}</a>
+                            <div class="text-right">
+                                <livewire:acquaintances.friend-requests-button :sender="$request->sender"/>
                             </div>
-                        @endforeach
-                    </div>
-                </details>
-            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </details>
         </div>
     @endif
 
