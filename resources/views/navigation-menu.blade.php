@@ -124,12 +124,15 @@
             <br/>
             <h5 class="sidebar-title">Information</h5>
             <div class="sidebar-divider"></div>
-            <x-jet-nav-link href="#">
-                            <span class="sidebar-icon">
-              <i class="fa-regular fa-calendar-check"></i>
-            </span>
-                {{ __('Schedule') }}
-            </x-jet-nav-link>
+            @if(auth()->user()->information->group !== null)
+                <x-jet-nav-link href="{{ route('groups.schedule', auth()->user()->information->group) }}"
+                                :active="request()->routeIs('groups.schedule', auth()->user()->information->group)">
+                    <span class="sidebar-icon">
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </span>
+                    {{ __('Schedule') }}
+                </x-jet-nav-link>
+            @endif
             <br/>
             <h5 class="sidebar-title">Group</h5>
             <div class="sidebar-divider"></div>

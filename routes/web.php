@@ -7,6 +7,7 @@ use App\Http\Controllers\FriendController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Jetstream\UserProfileController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserInformationController;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], static function () 
     Route::post('groups/{group}/add-users', [GroupController::class, 'addUserToGroup'])
         ->name('groups.add-users');
     Route::resource('groups.announcements', AnnouncementController::class);
+    Route::get('groups/{group}/schedule', [ScheduleController::class, 'index'])->name('groups.schedule');
 
     // Blog
     Route::resource('blog', BlogController::class);

@@ -9,8 +9,13 @@
         <div class="col-sm">
             <label for="name">Name</label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-                   value="{{ $name ?? '' }}" placeholder="Name"
+                   value="{{ $name ?? '' }}" placeholder="Name" list="groups"
                    required="required"/>
+            <datalist id="groups">
+                @foreach($groups as $groupName)
+                    <option value="{{ $groupName }}">{{ $groupName }}</option>
+                @endforeach
+            </datalist>
             <x-jet-input-error for="name"></x-jet-input-error>
         </div>
         <div class="col-sm">

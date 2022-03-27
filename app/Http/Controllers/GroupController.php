@@ -6,14 +6,21 @@ use App\Http\Requests\CreateGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
 use App\Models\User;
+use App\Services\UlSTUApiService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
+    private UlSTUApiService $ulStuApiService;
+
+    public function __construct(UlSTUApiService $ulSTUApiService)
+    {
+        $this->ulStuApiService = $ulSTUApiService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,8 +41,9 @@ class GroupController extends Controller
     public function create(): View
     {
         $users = User::all();
+        $groups = $this->ulStuApiService->getGroups();
 
-        return view('groups.create', compact('users'));
+        return view('groups.create', compact('users', 'groups'));
     }
 
     /**
@@ -71,8 +79,9 @@ class GroupController extends Controller
     public function edit(Group $group): View|Factory|Application
     {
         $users = User::all();
+        $groups = $this->ulStuApiService->getGroups();
 
-        return view('groups.edit', compact('users', 'group'));
+        return view('groups.edit', compact('users', 'group', 'groups'));
     }
 
     /**
