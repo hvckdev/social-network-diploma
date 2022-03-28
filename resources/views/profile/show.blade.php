@@ -136,7 +136,7 @@
                                                       name="show_city"
                                                       :value="$user->information->show_city"
                                     />
-                                    <label for="show-city" class="blank"></label>
+                                    <label for="show_city" class="blank"></label>
                                 </div>
                             </div>
                         </div>
