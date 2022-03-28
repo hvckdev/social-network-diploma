@@ -8,7 +8,8 @@
             @can('edit', $group)
                 <a class="btn btn-dark float-right btn-sm ml-5" href="{{ route('groups.edit', $group) }}">Edit</a>
             @endcan
-            <a class="btn btn-primary float-right btn-sm" href="{{ route('groups.edit', $group) }}">Create announcement</a>
+            <a class="btn btn-primary float-right btn-sm" href="{{ route('groups.announcements.create', $group) }}">Create
+                announcement</a>
         </x-slot>
 
         <p><span class="text-muted small">Course</span><br>{{ $group->course }}</p>
@@ -40,7 +41,9 @@
                 <p class="font-weight-bold">Announcements</p>
                 @foreach($group->announcements as $announcement)
                     <p>{{ $announcement->text }}</p>
-                    <small class="text-muted">{{ $announcement->created_at }}</small>
+                    <small class="text-muted">{{ $announcement->created_at }} <a
+                            href="{{ route('groups.announcements.edit', [$group, $announcement]) }}">edit</a>
+                    </small>
                 @endforeach
             </div>
         </div>

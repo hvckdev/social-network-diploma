@@ -124,7 +124,7 @@
             <br/>
             <h5 class="sidebar-title">Information</h5>
             <div class="sidebar-divider"></div>
-            @if(auth()->user()->information->group !== null)
+            @isset(auth()->user()->information->group)
                 <x-jet-nav-link href="{{ route('groups.schedule', auth()->user()->information->group) }}"
                                 :active="request()->routeIs('groups.schedule', auth()->user()->information->group)">
                     <span class="sidebar-icon">
@@ -132,7 +132,7 @@
                     </span>
                     {{ __('Schedule') }}
                 </x-jet-nav-link>
-            @endif
+            @endisset
             <br/>
             <h5 class="sidebar-title">Group</h5>
             <div class="sidebar-divider"></div>

@@ -11,9 +11,9 @@ class UpdateGroupAnnouncementRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdateGroupAnnouncementRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'text' => 'string|required|max:2048',
         ];
     }
 }

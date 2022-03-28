@@ -15,6 +15,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Multicaret\Acquaintances\Traits\CanLike;
 use Multicaret\Acquaintances\Traits\Friendable;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -28,6 +29,7 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use Friendable;
     use Messagable;
+    use CanLike;
 
     /**
      * The attributes that are mass assignable.
