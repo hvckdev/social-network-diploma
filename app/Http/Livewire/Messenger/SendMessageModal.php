@@ -31,6 +31,8 @@ class SendMessageModal extends Component
     {
         $thread = Thread::createOrFindThreadWithRecipient($this->recipient->id);
 
+        $this->validate();
+
         $message = $thread->messages()->create([
             'content' => $this->text
         ]);
@@ -39,7 +41,7 @@ class SendMessageModal extends Component
         $message->createForReceive($thread->id, $this->recipient->id);
     }
 
-    public function render(): Factory|View|Application
+    public function render()
     {
         return view('livewire.messenger.send-message-modal');
     }

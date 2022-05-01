@@ -82,9 +82,9 @@ class Thread extends Model
         return $thread;
     }
 
-    public function getLatestMessage(): Model|bool|HasMany
+    public function getLatestMessage(): Model|bool|HasMany|null
     {
-        return $this->messages()->latest()->first() ?? false;
+        return $this->messages()->latest()->first();
     }
 
     public function getRecipient($userId)

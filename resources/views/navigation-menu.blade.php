@@ -87,10 +87,6 @@
     <div class="sidebar-overlay" onclick="halfmoon.toggleSidebar()"></div>
     <div class="sidebar">
         <div class="sidebar-menu">
-            <!-- Sidebar brand -->
-            <a href="#" class="sidebar-brand">
-                {{ config('app.name') }}
-            </a>
             <!-- Sidebar links and titles -->
             <h5 class="sidebar-title">Your place</h5>
             <div class="sidebar-divider"></div>
