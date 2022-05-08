@@ -23,12 +23,6 @@
                     {{ auth()->user()->information->group->name ?? '-' }}
                 </div>
             </div>
-            <div class="col-6 col-xl-3">
-                <div class="card">
-                    <h2 class="card-title">Profits</h2>
-                    ...
-                </div>
-            </div>
         </div>
         <!-- Second row (equally spaced on large screens and up) -->
         <div class="row row-eq-spacing-lg">
@@ -40,31 +34,12 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="card h-lg-250 overflow-y-lg-auto"> <!-- h-lg-250 = height = 25rem (250px) only on large screens and up (> 992px), overflow-y-lg-auto = overflow-y: auto only on large screens and up (> 992px) -->
-                    <h2 class="card-title">Breakdown</h2>
-                    ...
-                </div>
-            </div>
         </div>
         <!-- Third row (equally spaced on large screens and up) -->
         <div class="row row-eq-spacing-lg">
             <div class="col-lg-8">
-                <div class="content">
-                    <h2 class="content-title">Customer stories <a href="#">#</a></h2>
-                    ...
-                </div>
                 <div class="card">
-                    <h2 class="card-title">Transactions</h2>
-                    ...
-                </div>
-                <div class="content">
-                    ...
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="content">
-                    <h2 class="content-title">Activity log <a href="#">#</a></h2>
+                    <h2 class="card-title">last articles</h2>
                     ...
                 </div>
             </div>

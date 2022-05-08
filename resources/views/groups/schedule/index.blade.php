@@ -7,7 +7,7 @@
             <x-slot name="head">
                 <th>#</th>
                 @foreach($days->days as $number => $lessons)
-                    <th>{{ $number + 1 }} couple</th>
+                    <th>lesson {{ $number + 1 }}</th>
                 @endforeach
             </x-slot>
             <x-slot name="body">

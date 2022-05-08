@@ -34,15 +34,4 @@ class UserInformationController extends Controller
 
         return redirect()->route('users.show', auth()->user());
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param UserInformation $userInformation
-     * @return void
-     */
-    public function destroy(UserInformation $userInformation): void
-    {
-        //
-    }
 }

@@ -24,7 +24,7 @@ class CreateGroupAnnouncementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'text' => 'string|required|max:2048',
+            'text' => 'string|required',
         ];
     }
 }

@@ -17,6 +17,7 @@ class Message extends Model
     protected $fillable = [
         'content'
     ];
+
     public function chats(): HasMany
     {
         return $this->hasMany(Chat::class);

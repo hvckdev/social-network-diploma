@@ -20,7 +20,7 @@
                         <div class="card-body text-center">
                             <p>
                                 <img src="{{ $user->profile_photo_url }}" alt=""
-                                     class="w-lg-quarter shadow-sm rounded img-fluid">
+                                     class="w-lg-half shadow-sm rounded img-fluid">
                             </p>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         @if($user->id !== auth()->user()->id)
                             <livewire:acquaintances.profile-friend-button :recipient="$user" class="mw-full"/>
                         @else
-                            <button class="btn w-full" data-toggle="modal" data-target="editProfilePhotoModal">Edit</button>
+                            <a href="{{ route('profile.show') }}" class="btn w-full">Edit</a>
                         @endif
                     </div>
                 </div>

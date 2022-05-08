@@ -24,16 +24,6 @@ class MakeUserAdmin extends Command
     protected $description = 'Makes a user as admin.';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return int
@@ -48,8 +38,9 @@ class MakeUserAdmin extends Command
             return 0;
         }
 
-        if (! empty($user->roles->first()))
+        if (! empty($user->roles->first())) {
             $user->removeRole($user->roles->first());
+        }
 
         try {
             $user->assignRole('admin');

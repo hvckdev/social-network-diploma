@@ -19,6 +19,7 @@ class GroupController extends Controller
     public function __construct(UlSTUApiService $ulSTUApiService)
     {
         $this->ulStuApiService = $ulSTUApiService;
+        $this->authorizeResource(Group::class);
     }
 
     /**

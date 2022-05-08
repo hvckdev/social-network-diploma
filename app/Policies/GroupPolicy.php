@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class GroupPolicy
 {
@@ -13,82 +14,59 @@ class GroupPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response
      */
-    public function viewAny(User $user)
+    public function viewAny(): Response
     {
-        //
+        return Response::allow();
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return Response
      */
-    public function view(User $user, Group $group)
+    public function view(): Response
     {
-        //
+        return Response::allow();
     }
 
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @return Response
      */
-    public function create(User $user)
+    public function create(User $user): Response
     {
-        //
+        return $user->hasRole('admin') ? Response::allow() : Response::deny();
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @param Group $group
+     * @return Response
      */
-    public function update(User $user, Group $group)
+    public function update(User $user, Group $group): Response
     {
-        //
+        if($group->curator->id === $user->id || $user->hasRole('admin')) {
+            return Response::allow();
+        }
+
+        return Response::deny();
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @param Group $group
+     * @return Response
      */
-    public function delete(User $user, Group $group)
+    public function delete(User $user, Group $group): Response
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Group $group)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Group $group)
-    {
-        //
+        return $user->hasRole('admin') ? Response::allow() : Response::deny();
     }
 }

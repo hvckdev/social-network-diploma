@@ -24,7 +24,7 @@ class CreateMessengerChatsTable extends Migration
         });
     }
 
-    /**
+    /**2
      * Reverse the migrations.
      *
      * @return void

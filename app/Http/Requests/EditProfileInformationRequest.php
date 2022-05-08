@@ -25,12 +25,12 @@ class EditProfileInformationRequest extends FormRequest
     {
         return [
             'first_name' => 'required|string|max:255',
-            'middle_name' => 'max:255',
+            'middle_name' => 'string|max:255',
             'last_name' => 'required|string|max:255',
             'birthday' => 'required|date',
             'country' => 'required|string|max:255',
             'city' => 'required|string|max:255',
-            'website' => 'max:255',
+            'website' => 'string|max:255',
             'show_website' => 'boolean',
             'show_middle_name' => 'boolean',
             'show_birthday' => 'boolean',

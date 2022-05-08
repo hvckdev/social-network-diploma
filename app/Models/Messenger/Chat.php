@@ -17,14 +17,9 @@ class Chat extends Model
     protected $table = 'messenger_chats';
 
     /**
-     * @var array
-     */
-    protected $guarded = [];
-
-    /**
      * @var string[]
      */
-    protected $casts = [
+    protected $dates = [
         'read_at' => 'datetime'
     ];
 
