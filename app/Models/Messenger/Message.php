@@ -28,7 +28,8 @@ class Message extends Model
         return $this->chats()->create([
             'thread_id' => $thread_id,
             'type' => 0,
-            'user_id' => auth()->user()->id]);
+            'user_id' => auth()->user()->id,
+        ]);
     }
 
     public function createForReceive($thread_id, $to_user): Model

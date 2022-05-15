@@ -37,18 +37,13 @@
         <x-slot name="body">
             @foreach($friends as $friend)
                 <tr>
-                    @push('modals')
-                        <livewire:messenger.send-message-modal :friend-id="$friend->id" :recipient="$friend"/>
-                    @endpush
                     <td>
                         <img src="{{ $friend->profile_photo_url }}" alt="" width="30" height="30">
                         <a href="{{ route('users.show', $friend) }}">
                             {{ $friend->name }}
                         </a>
                     </td>
-                    <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal"
-                           data-target="send-message-modal-{{ $friend->id }}">Send
-                            message</a></td>
+                    <td><livewire:messenger.send-message-modal :friend-id="$friend->id" :recipient="$friend"/></td>
                     <td>
                         <livewire:acquaintances.friend-delete-button :friend="$friend"/>
                     </td>

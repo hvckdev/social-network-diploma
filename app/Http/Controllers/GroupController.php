@@ -41,7 +41,7 @@ class GroupController extends Controller
      */
     public function create(): View
     {
-        $users = User::all();
+        $users = User::whereRelation('information', 'group_id', null);
         $groups = $this->ulStuApiService->getGroups();
 
         return view('groups.create', compact('users', 'groups'));
@@ -79,7 +79,7 @@ class GroupController extends Controller
      */
     public function edit(Group $group): View|Factory|Application
     {
-        $users = User::all();
+        $users = User::whereRelation('information', 'group_id', null);
         $groups = $this->ulStuApiService->getGroups();
 
         return view('groups.edit', compact('users', 'group', 'groups'));

@@ -15,7 +15,7 @@
                 @if($articles !== null)
                     @foreach($articles as $article)
                         <div class="col-sm-6">
-                            <div class="content">
+                            <div class="content card">
                                 <h2 class="content-title">
                                     {{ $article->name }}
                                 </h2>

@@ -63,9 +63,12 @@ class ArticleController extends Controller
      * @param Blog $blog
      * @param Article $article
      * @return Application|Factory|View
+     * @throws AuthorizationException
      */
     public function edit(Blog $blog, Article $article)
     {
+        $this->authorize('update', [Article::class, $blog]);
+
         return view('blog.article.edit', compact('blog', 'article'));
     }
 
@@ -76,9 +79,12 @@ class ArticleController extends Controller
      * @param Blog $blog
      * @param Article $article
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function update(UpdateArticleRequest $request, Blog $blog, Article $article): RedirectResponse
     {
+        $this->authorize('update', [Article::class, $blog]);
+
         $article->update($request->validated());
 
         return redirect()->route('blog.article.show', [$blog, $article]);
@@ -87,11 +93,17 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param Blog $blog
      * @param Article $article
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function destroy(Article $article)
+    public function destroy(Blog $blog, Article $article): RedirectResponse
     {
-        //
+        $this->authorize('delete', [Article::class, $blog]);
+
+        $article->delete();
+
+        return redirect()->route('blog.index');
     }
 }

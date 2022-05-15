@@ -25,14 +25,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', static function () {
     return view('welcome');
-});
+})->name('home');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], static function () {
-    // Jetstream
     Route::post('user/profile/update-information', [UserProfileController::class, 'updateUserProfileInformation'])
         ->name('update-user-information');
     Route::post('user/profile/update-password', [UserProfileController::class, 'updateUserPassword'])

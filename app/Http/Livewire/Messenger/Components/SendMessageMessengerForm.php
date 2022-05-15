@@ -16,7 +16,7 @@ class SendMessageMessengerForm extends Component
         $thread = Thread::createOrFindThreadWithRecipient($this->recipient->id);
 
         $message = $thread->messages()->create([
-            'content' => $this->content
+            'content' => $this->content,
         ]);
 
         $message->createForSend($thread->id);

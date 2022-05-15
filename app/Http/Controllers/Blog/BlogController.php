@@ -22,10 +22,7 @@ class BlogController extends Controller
     public function index()
     {
         $user = Auth::user();
-
-        if ($user !== null) {
-            $articles = $user->blog->articles ?? null;
-        }
+        $articles = $user->blog->articles ?? null;
 
         return view('blog.index', compact('user', 'articles'));
     }
@@ -69,39 +66,5 @@ class BlogController extends Controller
         $user = Auth::user();
 
         return view('blog.index', compact('articles', 'user'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Blog $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Blog $blog)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Blog $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Blog $blog)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Blog $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Blog $blog)
-    {
-        //
     }
 }

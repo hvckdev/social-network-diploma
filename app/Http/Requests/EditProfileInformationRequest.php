@@ -30,7 +30,7 @@ class EditProfileInformationRequest extends FormRequest
             'birthday' => 'required|date',
             'country' => 'required|string|max:255',
             'city' => 'required|string|max:255',
-            'website' => 'string|max:255',
+            'website' => 'string|max:255|nullable',
             'show_website' => 'boolean',
             'show_middle_name' => 'boolean',
             'show_birthday' => 'boolean',

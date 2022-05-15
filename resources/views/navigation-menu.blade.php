@@ -6,7 +6,7 @@
             </button>
         </div>
     @endauth
-    <a href="{{ config('app.url') }}" class="navbar-brand ml-10 ml-sm-20">
+    <a href="{{ route('home') }}" class="navbar-brand ml-10 ml-sm-20">
         <span class="d-none d-sm-flex">{{ config('app.name') }}</span>
     </a>
     <div class="navbar-content ml-auto">
@@ -28,7 +28,7 @@
                 <!-- w-250 = width: 25rem (250px), w-sm-350 = width: 35rem (350px) only on devices where width > 576px -->
                 <div class="dropdown-content p-20"> <!-- p-20 = padding: 2rem (20px) -->
                     @auth
-                        <h6 class="dropdown-header">{{ auth()->user()->name }}</h6>
+                        <h6 class="dropdown-header">{{ Auth::user()->name }}</h6>
                         <hr class="dropdown-divider">
                         <a href="{{ route('users.show', auth()->user()->id) }}" class="dropdown-item">Show profile</a>
                         <a href="{{ route('profile.show') }}" class="dropdown-item">Edit profile</a>
