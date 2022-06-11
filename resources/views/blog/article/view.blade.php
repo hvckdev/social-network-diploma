@@ -2,7 +2,9 @@
     <div class="card">
         <h5 class="card-title">
             {{ $article->name }}
+            @can('update')
             <a href="{{ route('blog.article.edit', [$blog, $article]) }}" class="btn btn-sm btn-primary float-right">Edit</a>
+            @endcan
         </h5>
         <div>
             {!! $article->text !!}

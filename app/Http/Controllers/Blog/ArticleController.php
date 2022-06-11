@@ -67,7 +67,7 @@ class ArticleController extends Controller
      */
     public function edit(Blog $blog, Article $article)
     {
-        $this->authorize('update', [Article::class, $blog]);
+        $this->authorize('update', [Article::class]);
 
         return view('blog.article.edit', compact('blog', 'article'));
     }
