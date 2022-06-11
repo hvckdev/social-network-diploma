@@ -15,8 +15,8 @@ class fCreateMessengerThreadsTable extends Migration
     {
         Schema::create('messenger_threads', static function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('first_user_id')->unique();
-            $table->unsignedBigInteger('second_user_id')->unique();
+            $table->unsignedBigInteger('first_user_id');
+            $table->unsignedBigInteger('second_user_id');
             $table->boolean('is_block')->default('0');
             $table->unsignedBigInteger('blocked_by')->nullable();
             $table->timestamps();
