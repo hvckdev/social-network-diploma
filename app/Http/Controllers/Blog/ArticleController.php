@@ -67,7 +67,7 @@ class ArticleController extends Controller
      */
     public function edit(Blog $blog, Article $article)
     {
-        $this->authorize('update', [Article::class]);
+        $this->authorize('update', [$article]);
 
         return view('blog.article.edit', compact('blog', 'article'));
     }
@@ -83,7 +83,7 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Blog $blog, Article $article): RedirectResponse
     {
-        $this->authorize('update', [Article::class, $blog]);
+        $this->authorize('update', [$article]);
 
         $article->update($request->validated());
 
