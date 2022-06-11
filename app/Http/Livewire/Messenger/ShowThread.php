@@ -41,14 +41,11 @@ class ShowThread extends Component
 
     public function chats(): Collection
     {
+        $this->thread->read();
+
         return $this->thread->chats()
             ->where('user_id', '=', $this->user->id)
             ->get();
-    }
-
-    public function read(): void
-    {
-        $this->thread->read();
     }
 
     public function render(): Factory|View|Application

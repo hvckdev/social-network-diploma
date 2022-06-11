@@ -1,5 +1,4 @@
 <div wire:poll.keep-alive>
-    {{ $this->read() }}
     <x-card-layout>
         <x-slot name="title">
             {{ $thread->getRecipient($this->user->id)->information->first_name }}

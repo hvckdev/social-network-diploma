@@ -25,7 +25,7 @@ class CreateUserInformationRequest extends FormRequest
     {
         return [
             'first_name' => 'required|string|max:255',
-            'middle_name' => 'string|max:255|nullable',
+            'middle_name' => 'nullable|string|max:255',
             'last_name' => 'required|string|max:255',
             'birthday' => 'required|date',
             'country' => 'required|string|max:255',

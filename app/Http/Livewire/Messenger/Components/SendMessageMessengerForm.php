@@ -11,8 +11,14 @@ class SendMessageMessengerForm extends Component
     public $content;
     public User $recipient;
 
+    protected $rules = [
+        'content' => 'required|string',
+    ];
+
     public function send(): void
     {
+        $this->validate();
+
         $thread = Thread::createOrFindThreadWithRecipient($this->recipient->id);
 
         $message = $thread->messages()->create([
@@ -21,8 +27,6 @@ class SendMessageMessengerForm extends Component
 
         $message->createForSend($thread->id);
         $message->createForReceive($thread->id, $this->recipient->id);
-
-        $this->content = '';
     }
 
     public function render()
