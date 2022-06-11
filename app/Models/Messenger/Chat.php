@@ -11,7 +11,7 @@ class Chat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['thread_id', 'user_id', 'type'];
+    protected $fillable = ['thread_id', 'user_id', 'type', 'read_at'];
     /**
      * @var string
      */

@@ -99,7 +99,9 @@ class Thread extends Model
 
     public function read(): void
     {
-        $chats = $this->chats->where('read_at', null)->where('type', 0)->where('user_id', '!=', auth()->id());
+        $chats = $this->chats->where('read_at', null)
+            ->where('type', 0)
+            ->where('user_id', '!=', auth()->id());
 
         foreach ($chats as $chat) {
             $chat->update(['read_at' => Carbon::now()]);
