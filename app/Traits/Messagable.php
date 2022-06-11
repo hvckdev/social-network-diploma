@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\Messenger\Chat;
 use App\Models\Messenger\Thread;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -11,7 +12,13 @@ trait Messagable
     {
         return Thread::query()
             ->where('first_user_id', '=', $this->id)
-            ->orWhere('second_user_id', '=', $this->id);
+            ->orWhere('second_user_id', '=', $this->id)
+            ->orderByDesc(
+                Chat::select('created_at')
+                    ->whereColumn('messenger_chats.thread_id', 'messenger_threads.id')
+                    ->latest()
+                    ->take(1)
+            );
     }
 
     public function getUnreadMessagesCount(): int
