@@ -41,7 +41,7 @@ class GroupController extends Controller
      */
     public function create(): View
     {
-        $users = User::whereRelation('information', 'group_id', null);
+        $users = User::all();
         $groups = $this->ulStuApiService->getGroups();
 
         return view('groups.create', compact('users', 'groups'));
